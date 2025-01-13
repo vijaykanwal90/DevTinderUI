@@ -5,12 +5,15 @@ import Login from "./components/Login"
 import Feed from "./components/Feed"
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Signup from "./components/Signup"
+import store from "./Store/store"
+import { Provider } from "react-redux"
 import { NextUIProvider } from "@nextui-org/react"
 function App() {
   
 
   return (
     <>
+    <Provider store={store}>
     <NextUIProvider>
      <BrowserRouter>
      <Routes>
@@ -26,6 +29,7 @@ function App() {
      </Routes>
      </BrowserRouter>
      </NextUIProvider>
+     </Provider>
     </>
   )
 }

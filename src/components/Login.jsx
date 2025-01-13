@@ -5,10 +5,13 @@ import { redirect } from 'react-router-dom';
 import { Link ,useNavigate} from 'react-router-dom';
 import feed from './Feed'
 import Signup from './Signup'
+import { useDispatch } from 'react-redux';
+import { addUser } from '../features/userSlice';
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('vivek95@gmail.com');
+    const [password, setPassword] = useState('Vivek@95');
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,38 +24,47 @@ const Login = () => {
             if(res.status===200){
               navigate('/feed')
             }
-            console.log(res);
+            // console.log(res.data.user);
+
+            dispatch(addUser(res.data.user))
         } catch (error) {
             console.log(error);
         }
     };
 
     return (
+      
         <form
             className="w-full max-w-md flex flex-col gap-6 bg-white p-6 shadow-md rounded-lg"
             onSubmit={handleSubmit} // Form submission handled here
         > 
         <h2 className='text-black text-center'>Login</h2>
+        <label className='text-black' htmlFor="email">
+                Email
+              </label>
             <Input
                 required
                 errorMessage="Please enter a valid Email"
-                label="Email"
+            
                 labelPlacement="outside"
-                name="email"
+                name=""
                 placeholder="Enter your email"
                 type="email" // Use email type for better validation
                 className="text-black"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
             />
-              <hr />
+              
+              <label className='text-black' htmlFor="password">
+                Password
+              </label>
             <Input
                 required
                 errorMessage="Please enter a valid password"
-                label="Password"
+                
                 labelPlacement="outside"
                 name="password"
-                placeholder="Enter your password"
+                placeholder=""
                 type="password" // Set to password type
                 className="text-black"
                 onChange={(e) => setPassword(e.target.value)}
