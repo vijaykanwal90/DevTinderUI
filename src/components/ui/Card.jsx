@@ -1,56 +1,50 @@
-import React ,{useState}from 'react'
+import * as React from "react"
 
-const Card = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+import { cn } from "@/lib/utils"
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % 5); // Loops back to 0 after the last item
-  };
+const Card = React.forwardRef(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("rounded-xl border bg-card text-card-foreground shadow", className)}
+    {...props} />
+))
+Card.displayName = "Card"
 
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + 5) % 5); // Loops to 4 when going back from 0
-  };
-  return (
-    <div className="w-full max-w-xs relative">
-      <div className="overflow-hidden">
-        <div
-          className="flex transition-transform duration-300"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-          }}
-        >
-         {user.map((user)=>{
-                return(
-                    <div key={user._id} className="w-full">
-                    <div className="bg-white p-4 rounded-lg shadow-lg">
-                    <h1 className="text-xl font-bold">{user.firstName}</h1>
-                    <p className="text-gray-500">{user.lastName}</p>
-                    </div>
-                </div>
-                )
-         })
-         }
-        </div>
-      </div>
+const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    {...props} />
+))
+CardHeader.displayName = "CardHeader"
 
-      {/* Previous Button */}
-      <button
-        onClick={handlePrevious}
-        className="absolute top-1/2 left-0 transform -translate-y-1/2 p-2 bg-black text-white rounded-full"
-      >
-        &lt;
-      </button>
+const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("font-semibold leading-none tracking-tight", className)}
+    {...props} />
+))
+CardTitle.displayName = "CardTitle"
 
-      {/* Next Button */}
-      <button
-        onClick={handleNext}
-        className="absolute top-1/2 right-0 transform -translate-y-1/2 p-2 bg-black text-white rounded-full"
-      >
-        &gt;
-      </button>
-    </div>
+const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("text-sm text-muted-foreground", className)}
+    {...props} />
+))
+CardDescription.displayName = "CardDescription"
 
-  )
-}
+const CardContent = React.forwardRef(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+))
+CardContent.displayName = "CardContent"
 
-export default Card
+const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex items-center p-6 pt-0", className)}
+    {...props} />
+))
+CardFooter.displayName = "CardFooter"
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }

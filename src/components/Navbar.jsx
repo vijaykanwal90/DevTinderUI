@@ -5,13 +5,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import {useDispatch} from 'react-redux';
 import { removeUser } from '../features/userSlice'
-
+import { addUser } from '../features/userSlice';
+import { useEffect } from 'react';
+// import Button from './Button'
 const Navbar = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch()
-  const user = useSelector((store)=>store.user)
-  console.log("hey user data at ui navbar" , user)
+  // const userData = useSelector((store)=>store.user)
+  const userData = useSelector((state) => state.user)
+
+  console.log("hey user data at ui navbar" , userData)
   const logout = async()=>{
     console.log("logout")
     try{
@@ -29,24 +33,34 @@ const Navbar = () => {
       console.log(error )
     }
   }
+  // const dispatch = useDispatch()
+  const fetchData = async ()=>{
+    const res = await axios.get("http://localhost:3000/profile",{withCredentials:true});
+    console.log(res)
+    dispatch(addUser(res.data))
+    return res.data
+  }
+  useEffect (()=>{
+    fetchData()
+  },[])
   return (
     <>
-    {user && (
+    {userData && (
       <div className="navbar bg-base-400">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">DevTinder</a>
+        <Link to={"/"} className="btn btn-ghost text-xl">DevTinder</Link>
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
           <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto bg-black" />
         </div>
-        <p>Hello {user?.firstName}</p>
+        <p>Hello {userData?.firstName}</p>
         <div className="dropdown dropdown-end mx-4">
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
           <div className="w-10 rounded-full">
             <img
               alt="Tailwind CSS Navbar component"
-              src={user?.photoUrl} />
+              src={userData?.photoUrl} />
               {/* <h2>DevTinder</h2> */}
           </div>
         </div>
@@ -60,7 +74,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li><a>Settings</a></li>
-          <li><a onClick={logout}>Logout</a></li>
+          <li><button onClick={logout}>Logout</button></li>
         </ul>
       </div>
       

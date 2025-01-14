@@ -7,24 +7,27 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { addUser } from '../features/userSlice';
 const Body = () => {
-  const user = useSelector((store) => store.user);
+  const userData = useSelector((store) => store.user);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const fetchUser = async () =>{
     // if(user) return;
-
+    if(!userData){
+      navigate('/login')
+    }
+    if(userData) return ;
     try{
+
       const res = await axios.get('http://localhost:3000/profile',{withCredentials:true});
       console.log(res)
       dispatch(addUser(res.data))
-      if(!user){
-        navigate('/login')
-      }
+     
     }
     catch(error){
-      // if(error.response.status===401){
-      //   navigate('/login')
-      // }
+      if(error.response.status===401){
+        navigate('/login')
+      }
       console.log(error)
     }
   
