@@ -15,7 +15,7 @@ const Navbar = () => {
   // const userData = useSelector((store)=>store.user)
   const userData = useSelector((state) => state.user)
 
-  console.log("hey user data at ui navbar" , userData)
+  // console.log("hey user data at ui navbar" , userData)
   const logout = async()=>{
     console.log("logout")
     try{
@@ -36,7 +36,7 @@ const Navbar = () => {
   // const dispatch = useDispatch()
   const fetchData = async ()=>{
     const res = await axios.get("http://localhost:3000/profile",{withCredentials:true});
-    console.log(res)
+    // console.log(res)
     dispatch(addUser(res.data))
     return res.data
   }

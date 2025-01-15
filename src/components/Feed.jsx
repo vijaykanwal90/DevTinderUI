@@ -7,7 +7,7 @@ import { addFeed } from '../features/feedSlice';
 const Feed = () => {
   const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
-  const [toUserId, setToUserId] = useState('');
+  const [toUser, setToUser] = useState('');
 
   const [status , setStatus] = useState('')
   const feed = useSelector((state) => state.feed);
@@ -20,16 +20,27 @@ const Feed = () => {
   };
   // console.log(status)
   const requestSent = async ()=>{
-    const res = await axios.post(`http://localhost:3000//sendConnectionRequest/:${status}/:${toUserId}`)
-    dispatch(addFeed(res.data))
+    console.log("status is "  + status  + " " + " userId is " +  toUser)
+    try {
+      const res = await axios.post(`http://localhost:3000/sendConnectionRequest/${status}/${toUser}`,{},{withCredentials:true});
+      console.log(res.data)
+    // dispatch(addFeed(res.data))
 
+    } catch (error) {
+      console.log("error is " + error.message)
+    }
+    
   }
   useEffect(() => {
     fetchData();
   }, []);
+
   useEffect(()=>{
+    if(status===''){
+      return;
+    }
     requestSent()
-    console.log("status is "  + status  + " " + " userId is " +  toUserId)
+    
     
   },[status])
 
@@ -53,9 +64,9 @@ const Feed = () => {
           {/* <p>{user.about}</p> */}
           <div className='flex justify-center gap-4'>
           <button className='bg-red-600' onClick={()=>{setStatus('ignored');
-            setUserId(user._id)}}>Ignore</button>
+            setToUser(user._id)}}>Ignore</button>
           <button className='bg-green-600' onClick={() =>{setStatus('interested');
-            setToUserId(users.toUserId)
+            setToUser(user._id)
           }}>Interested</button>
           </div>
           
