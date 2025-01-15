@@ -14,16 +14,16 @@ const Feed = () => {
 
   const fetchData = async () => {
     const res = await axios.get("http://localhost:3000/feed", { withCredentials: true });
-    console.log(res.data);
+    // console.log(res.data);
     dispatch(addFeed(res.data));
     setUsers(res.data);
   };
   // console.log(status)
   const requestSent = async ()=>{
-    console.log("status is "  + status  + " " + " userId is " +  toUser)
+    // console.log("status is "  + status  + " " + " userId is " +  toUser)
     try {
       const res = await axios.post(`http://localhost:3000/sendConnectionRequest/${status}/${toUser}`,{},{withCredentials:true});
-      console.log(res.data)
+      // console.log(res.data)
     // dispatch(addFeed(res.data))
 
     } catch (error) {
