@@ -7,6 +7,9 @@ import { addFeed } from '../features/feedSlice';
 const Feed = () => {
   const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
+  const [toUserId, setToUserId] = useState('');
+
+  const [status , setStatus] = useState('')
   const feed = useSelector((state) => state.feed);
 
   const fetchData = async () => {
@@ -15,10 +18,20 @@ const Feed = () => {
     dispatch(addFeed(res.data));
     setUsers(res.data);
   };
+  // console.log(status)
+  const requestSent = async ()=>{
+    const res = await axios.post(`http://localhost:3000//sendConnectionRequest/:${status}/:${toUserId}`)
+    dispatch(addFeed(res.data))
 
+  }
   useEffect(() => {
     fetchData();
   }, []);
+  useEffect(()=>{
+    requestSent()
+    console.log("status is "  + status  + " " + " userId is " +  toUserId)
+    
+  },[status])
 
   return (
     <div>
@@ -39,8 +52,11 @@ const Feed = () => {
           </CardBody>
           {/* <p>{user.about}</p> */}
           <div className='flex justify-center gap-4'>
-          <button className='bg-red-600'>Ignore</button>
-          <button className='bg-green-600'>Interested</button>
+          <button className='bg-red-600' onClick={()=>{setStatus('ignored');
+            setUserId(user._id)}}>Ignore</button>
+          <button className='bg-green-600' onClick={() =>{setStatus('interested');
+            setToUserId(users.toUserId)
+          }}>Interested</button>
           </div>
           
 

@@ -8,8 +8,8 @@ import Signup from './Signup'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../features/userSlice';
 const Login = () => {
-    const [email, setEmail] = useState('vivek95@gmail.com');
-    const [password, setPassword] = useState('Vivek@95');
+    const [email, setEmail] = useState('harshit24@gmail.com');
+    const [password, setPassword] = useState('Harshit@24');
     const navigate = useNavigate();
     const dispatch = useDispatch()
 

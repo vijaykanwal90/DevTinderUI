@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { useSelector ,useDispatch} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Feed from './Feed';
 import axios from 'axios';
 import { addUser } from '../features/userSlice';
 const Body = () => {
@@ -46,6 +47,9 @@ const Body = () => {
     
 
       {/* Center the Outlet content */}
+      {/* {userData && (
+        navigate('/feed')
+      )} */}
       <div className="flex-grow flex items-center justify-center">
         <Outlet />
       </div>

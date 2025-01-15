@@ -11,12 +11,14 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card"
+import ProfileEdit from './ProfileEdit'
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import { addUser } from '../features/userSlice'
 const Profile = () => {
   const userData = useSelector((state) => state.user)
   const {firstName , lastName , about , photoUrl} = userData
+  const [isOpen, setIsOpen] = React.useState(false)
   const dispatch = useDispatch()
   const fetchData = async () => {
     const res = await axios.get("http://localhost:3000/profile", { withCredentials: true });
@@ -28,24 +30,35 @@ const Profile = () => {
     fetchData()
   }, [])
   return (
-        userData && (
+    <div>
+      {/* Check if userData exists */}
+      {userData ? (
 
+      
+        // If userData exists, render the profile or edit section
+        
           <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>{firstName + " " + lastName}</CardTitle>
-        <CardDescription>{about}.</CardDescription>
+        <CardTitle>{userData.firstName + " " + userData.lastName}</CardTitle>
+        <CardDescription>{userData.age + " " + userData.about}</CardDescription>
       </CardHeader>
       <CardContent>
-          <img src={photoUrl} alt="Profile Picture" className="rounded-lg" />
+        <img src={userData.photoUrl} alt="" />
       </CardContent>
-      <CardFooter className="flex justify-end">
-       
-        <Button>Edit</Button>
-      </CardFooter>
-    </Card>
-        )
-     
+      <CardFooter className="flex justify-between">
+                   
+               <ProfileEdit />
+              </CardFooter>
+          </Card>
+        
+      ) : (
+        // If userData doesn't exist, show the login message
+        <p className="text-gray-500">Please log in to view your profile.</p>
+      )}
+    </div>
   )
+  
+
 
 }
 
