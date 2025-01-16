@@ -1,12 +1,23 @@
 import React, {useState , useEffect} from 'react'
 import axios from 'axios'
+import { addConnection } from '@/features/connectionSlice'
+import { useDispatch } from 'react-redux'
+// import { useSelect } from '@nextui-org/react'
+import { useSelector } from 'react-redux'
 const Connections = () => {
-  const [connections, setConnections] = useState([])
+  const [connection, setConnection] = useState([])
+
+  const dispatch = useDispatch()
+  const connections = useSelector((state) => state.connection)
   const getConnections = async()=>{
     try {
       const res = await axios.get('http://localhost:3000/user/connections',{withCredentials:true})
-      // console.log(res.data.connection)
-      setConnections(res.data.connection)
+      console.log(res.data.connection)
+      // setConnections(res.data.connection)
+      dispatch(addConnection(res.data.connection))
+      setConnection(res.data.connection)
+      
+      console.log("the connections are " + connections)
     } catch (error) {
       console.log("error is " + error)
     }
@@ -24,7 +35,7 @@ const Connections = () => {
  <div className='my-10 flex justify-center'>
   <div className='w-full max-w-md mx-auto'>
     <h1 className='font-bold text-3xl text-center mb-6 text-gray-800'>Connections</h1>
-    {connections.map((connection) => {
+    {connection.map((connection) => {
       const { firstName, lastName, photoUrl, about } = connection.fromUserId;
       return (
         <div className="flex items-center my-5 bg-gray-200 p-4 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-gray-300">
