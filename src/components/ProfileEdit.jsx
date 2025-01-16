@@ -16,18 +16,19 @@ import { Button } from "@/components/ui/button"
   import { useSelector } from 'react-redux'
   import { addUser } from '@/features/userSlice'
   import { useDispatch } from 'react-redux'
-import { ConstructionIcon } from 'lucide-react'
 const ProfileEdit = () => {
     const user = useSelector((state) => state.user)
+    const {firstName,lastName,age, photoUrl , gender,about} = user;
     const dispatch = useDispatch()
     const [formData,setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        age: '',
-        photoUrl:  '',
-        gender:'',
-        about:'',
+        firstName: firstName || '',
+        lastName: lastName || '',
+        age: age || '', 
+        photoUrl: photoUrl  || '',
+        gender:gender || '',
+        about:about || '', 
     })
+    console.log("user data from store " + user.firstName)
     useEffect(() => {
         if (user) {
             setFormData({
@@ -40,8 +41,8 @@ const ProfileEdit = () => {
             });
         }
     }, [user]);
-    console.log("the user data is " + JSON.stringify(user))
-    console.log(user.firstName)
+    // console.log("the user data is " + JSON.stringify(user))
+    // console.log(user.firstName)
     const handleChange = (e)=>{
         const {name,value} = e.target
         setFormData((prevData) => ({
@@ -59,7 +60,7 @@ const ProfileEdit = () => {
             console.log("profile updated successfully")
             dispatch(addUser(res.data))
         }
-        console.log(res.data)
+        // console.log(res.data)
     }
     // useEffect(() => {
     //     console.log("the form data updated" + formData);

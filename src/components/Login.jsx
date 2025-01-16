@@ -8,13 +8,14 @@ import Signup from './Signup'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../features/userSlice';
 const Login = () => {
-    const [email, setEmail] = useState('jacks123@gmail.com');
-    const [password, setPassword] = useState('Jacks@123');
+    const [email, setEmail] = useState('elon1234@gmail.com');
+    const [password, setPassword] = useState('Elon@1234');
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
+        console.log(email)
         try {
             const res = await axios.post(
                 'http://localhost:3000/login',
@@ -36,7 +37,7 @@ const Login = () => {
       
         <form
             className="w-full max-w-md flex flex-col gap-6 bg-white p-6 shadow-md rounded-lg"
-            onSubmit={handleSubmit} // Form submission handled here
+             // Form submission handled here
         > 
         <h2 className='text-black text-center'>Login</h2>
         <label className='text-black' htmlFor="email">

@@ -20,15 +20,15 @@ const Profile = () => {
   const {firstName , lastName , about , photoUrl} = userData
   const [isOpen, setIsOpen] = React.useState(false)
   const dispatch = useDispatch()
-  const fetchData = async () => {
-    const res = await axios.get("http://localhost:3000/profile", { withCredentials: true });
-    console.log(res)
-    dispatch(addUser(res.data))
-    return res.data
-  }
-  useEffect(() => {
-    fetchData()
-  }, [])
+  // const fetchData = async () => {
+  //   const res = await axios.get("http://localhost:3000/profile", { withCredentials: true });
+  //   // console.log(res)
+  //   dispatch(addUser(res.data))
+  //   return res.data
+  // }
+  // useEffect(() => {
+  //   fetchData()
+  // }, [])
   return (
     <div>
       {/* Check if userData exists */}
@@ -39,11 +39,11 @@ const Profile = () => {
         
           <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>{userData.firstName + " " + userData.lastName}</CardTitle>
-        <CardDescription>{userData.age + " " + userData.about}</CardDescription>
+        <CardTitle>{userData?.firstName + " " + userData?.lastName}</CardTitle>
+        <CardDescription>{userData?.age + " " + userData?.about}</CardDescription>
       </CardHeader>
       <CardContent>
-        <img src={userData.photoUrl} alt="" />
+        <img src={userData?.photoUrl} alt="" />
       </CardContent>
       <CardFooter className="flex justify-between">
                    
