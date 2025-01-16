@@ -20,15 +20,15 @@ const Profile = () => {
   const {firstName , lastName , about , photoUrl} = userData
   const [isOpen, setIsOpen] = React.useState(false)
   const dispatch = useDispatch()
-  // const fetchData = async () => {
-  //   const res = await axios.get("http://localhost:3000/profile", { withCredentials: true });
-  //   // console.log(res)
-  //   dispatch(addUser(res.data))
-  //   return res.data
-  // }
-  // useEffect(() => {
-  //   fetchData()
-  // }, [])
+  const fetchData = async () => {
+    const res = await axios.get("http://localhost:3000/profile", { withCredentials: true });
+    // console.log(res)
+    dispatch(addUser(res.data))
+    return res.data
+  }
+  useEffect(() => {
+    fetchData()
+  }, [])
   return (
     <div>
       {/* Check if userData exists */}
@@ -47,7 +47,7 @@ const Profile = () => {
       </CardContent>
       <CardFooter className="flex justify-between">
                    
-               <ProfileEdit />
+               <ProfileEdit  />
               </CardFooter>
           </Card>
         
