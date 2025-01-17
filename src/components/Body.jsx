@@ -34,7 +34,7 @@ const Body = () => {
   useEffect(() => {
     
     if (!user) {
-      console.log("no user so naviagating to log in ")
+      // console.log("no user so naviagating to log in ")
       navigate('/login');
       // return; // Exit the function, don't continue with the API call
     }

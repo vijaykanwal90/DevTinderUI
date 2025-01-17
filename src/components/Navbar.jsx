@@ -16,7 +16,7 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   // const [isProfile, setIsProfile] = React.useState(false);
   const userData = user.user;
-  console.log("user Data at navbar "  + userData)
+  // console.log("user Data at navbar "  + userData)
 
   // console.log("hey user data at ui navbar" , userData)
   const logout = async () => {

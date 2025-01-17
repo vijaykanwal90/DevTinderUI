@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 const ProfileEdit = () => {
   const userData = useSelector((state) => state.user);
   const [isSaved, setIsSaved] = useState(false);
-  console.log("user Data in the profile" + JSON.stringify(userData));
+  // console.log("user Data in the profile" + JSON.stringify(userData));
   // const { firstName, lastName, age, photoUrl, gender, about } = userData;
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -30,8 +30,8 @@ const ProfileEdit = () => {
     gender: userData.gender || "",
     about: userData.about || "",
   });
-  console.log("user data from formData" + formData.firstName);
-  console.log("user data from store " + userData.firstName);
+  // console.log("user data from formData" + formData.firstName);
+  // console.log("user data from store " + userData.firstName);
   useEffect(() => {
     if (userData) {
       setFormData({

@@ -17,14 +17,21 @@ const Feed = () => {
   // console.log(user)
 
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:3000/feed", { withCredentials: true });
-    // console.log(res.data[0]);
-    // const users = res.data;
-    // users.map((user)=>{
-    //   console.log( "hey this is user Data " + user.firstName)
-    // })
-    // console.log(typeof(users))
-    dispatch(addFeed(res.data));
+    try{
+      const res = await axios.get("http://localhost:3000/feed", { withCredentials: true });
+      // console.log(res.data[0]);
+      // const users = res.data;
+      // users.map((user)=>{
+      //   console.log( "hey this is user Data " + user.firstName)
+      // })
+      // console.log(typeof(users))
+      // console.log("hey is " + res.data.data)
+      dispatch(addFeed(res?.data?.data));
+    }
+    catch(error){
+      console.log("error is " + error.message)
+    }
+    
     // setUsers(res.data);
   };
   // console.log(status)
@@ -33,14 +40,6 @@ const Feed = () => {
     fetchData();
   }, []);
 
-  useEffect(()=>{
-    if(status===''){
-      return;
-    }
-    requestSent()
-    
-    
-  },[status])
  if(!feed){
   return <h1>Loading...</h1>
  }

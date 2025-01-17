@@ -26,7 +26,7 @@ const Requests = () => {
   const handleClick = (status,userId)=> async()=>{
     console.log("on review request button click")
     const res = await axios.post("http://localhost:3000/reviewConnectionRequest/"+status+ "/" + userId,{}, {withCredentials:true})
-    dispatch(removeRequest(userId))
+    dispatch(removeRequest(res.userId))
   }
   useEffect(()=>{
     fetchRequests()

@@ -5,8 +5,13 @@ export const connectionSlice = createSlice({
         connection:null,
     },
     reducers:{
-        addConnection:(state,action) => action.payload
-        
+        addConnection:(state,action) => action.payload,
+        // removeConnection:(state,action)=>{
+        //     const newArray = state.filter((r)=>{
+        //         r.id !==action.payload
+        //     })
+        //     return newArray
+        // }
     
 },
 })
