@@ -13,7 +13,10 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   // const userData = useSelector((store)=>store.user)
-  const userData = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
+  // const [isProfile, setIsProfile] = React.useState(false);
+  const userData = user.user;
+  console.log("user Data at navbar "  + userData)
 
   // console.log("hey user data at ui navbar" , userData)
   const logout = async () => {
@@ -34,30 +37,21 @@ const Navbar = () => {
       console.log(error);
     }
   };
-  // const dispatch = useDispatch()
-  // const fetchData = async () => {
-  //   if(!userData) return ;
-
-  //   const res = await axios.get("http://localhost:3000/profile", {
-  //     withCredentials: true,
-  //   });
-  //   // console.log(res)
-  //   dispatch(addUser(res.data));
-  //   return res.data;
-  // };
-  // useEffect(() => {
-
-  //   fetchData();
-  // }, []);
+ useEffect(() => {
+      if(user){
+        // setIsProfile(true)
+      }
+ }),[]
   return (
     <>
-      {userData && (
+      
         <div className="navbar bg-base-400">
           <div className="flex-1">
             <Link to={"/"} className="btn btn-ghost text-xl">
               DevTinder
             </Link>
           </div>
+          {user && (
           <div className="flex-none gap-2">
             <div className="form-control">
               <input
@@ -66,7 +60,7 @@ const Navbar = () => {
                 className="input input-bordered w-24 md:w-auto bg-black"
               />
             </div>
-            <p>Hello {userData?.firstName}</p>
+            <p>Hello {user?.firstName}</p>
             <div className="dropdown dropdown-end mx-4">
               <div
                 tabIndex={0}
@@ -76,7 +70,7 @@ const Navbar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src={userData?.photoUrl}
+                    src={user?.photoUrl}
                   />
                   {/* <h2>DevTinder</h2> */}
                 </div>
@@ -102,8 +96,9 @@ const Navbar = () => {
               </ul>
             </div>
           </div>
+          )}
         </div>
-      )}
+      
     </>
   );
 };
