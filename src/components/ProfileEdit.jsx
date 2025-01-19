@@ -1,167 +1,162 @@
-import React from "react";
+import React from 'react'
+import {useSelector} from 'react-redux'
+import { Card, CardFooter, CardTitle } from './ui/card'
+import { Label } from './ui/label'
+import { Input } from './ui/input'
+import { Button } from './ui/button'
+import { useState } from 'react'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../features/userSlice'
+import {toast} from "sonner"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { addUser } from "@/features/userSlice";
-import { useDispatch } from "react-redux";
-const ProfileEdit = () => {
-  const userData = useSelector((state) => state.user);
-  const [isSaved, setIsSaved] = useState(false);
-  // console.log("user Data in the profile" + JSON.stringify(userData));
-  // const { firstName, lastName, age, photoUrl, gender, about } = userData;
-  const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
-    firstName: userData.firstName || "",
-    lastName: userData.lastName || "",
-    age: userData.age || "",
-    photoUrl: userData.photoUrl || "",
-    gender: userData.gender || "",
-    about: userData.about || "",
-  });
-  // console.log("user data from formData" + formData.firstName);
-  // console.log("user data from store " + userData.firstName);
-  useEffect(() => {
-    if (userData) {
-      setFormData({
-        firstName: userData.firstName ,
-        lastName: userData.lastName ,
-        age: userData.age ,
-        photoUrl: userData.photoUrl ,
-        gender: userData.gender,
-        about: userData.about,
-      });
-    }
-  }, [isSaved]);
-  // console.log("the user data is " + JSON.stringify(user))
-  // console.log(user.firstName)
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    // console.log("the first name is " + formData);
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(" while submitting " + formData);
-    const res = await axios.patch(
-      "http://localhost:3000/profile/edit",
-      formData,
-      { withCredentials: true }
-    );
-    console.log("submitted form data" + JSON.stringify(formData));
-    if (res.status == 200) {
-      console.log("profile updated successfully");
-      dispatch(addUser(res.data));
-    }
-    setIsSaved(true);
-    // console.log(res.data)
-  };
-  // useEffect(() => {
-  //     // console.log("the form data updated" + formData);
-      
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
-  // }, [isSaved]);
+const ProfileEdit = ({isOpen,setIsOpen}) => {
+  const user = useSelector((state) => state.user)
+  const [firstName, setFirstName] = useState(user?.firstName || " ")
+  const [lastName, setLastName] = useState(user?.lastName || " ")
+  const [age, setAge] = useState(user?.age || " ")
+  const [photoUrl, setPhotoUrl] = useState(user?.photoUrl || " ")
+  const [gender,setGender] = useState(user?.gender  || " ")
+  const [about,setAbout] = useState(user?.about || " ")
+  
+
+  const dispatch = useDispatch()
+  // const [isOpen, setIsOpen] = useState(false)
+  
+    const handleSubmit = async (e) => {
+  
+        e.preventDefault();
+        try{
+          const res = await axios.patch(
+            "http://localhost:3000/profile/edit",
+            {firstName,lastName,age,photoUrl
+              ,gender,about
+            },
+            { withCredentials: true }
+          );
+          // console.log("submitted form data" + JSON.stringify(formData));
+          if (res.status == 200) {
+            // console.log("profile updated successfully");
+            dispatch(addUser(res.data.data));
+            toast.success('Profile updated successfully')
+          }
+          setIsOpen(false);
+
+        }
+        catch(err){
+          console.log(err)
+          toast.error('Error updating profile')
+        }
+        // console.log(" while submitting " + formData);
+       
+        
+        // console.log(res.data)
+      // setIsOpen(!sOpen)
+  
+  
+      };
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="firstName" className="text-right">
-              FirstName
-            </Label>
-            <Input
-              type="text"
-              name="firstName"
-              onChange={handleChange}
-              value={formData.firstName}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              LastName
-            </Label>
-            <Input
-              name="lastName"
-              onChange={handleChange}
-              value={formData.lastName}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Age
-            </Label>
-            <Input
-              name="age"
-              onChange={handleChange}
-              value={formData.age}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Photo
-            </Label>
-            <Input
-              name="photoUrl"
-              onChange={handleChange}
-              value={formData.photoUrl}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Gender
-            </Label>
-            <Input
-              name="gender"
-              onChange={handleChange}
-              value={formData.gender}
-              className="col-span-3 text-black"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              About
-            </Label>
-            <Input
-              name="about"
-              onChange={handleChange}
-              value={formData.about}
-              className="col-span-3"
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button onClick={handleSubmit}>Save changes</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-};
+    <Card className="w-[350px]">
+    <CardTitle>Edit Profile</CardTitle>
 
-export default ProfileEdit;
+    <div className="grid gap-4 py-4">
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="firstName" className="text-right">
+          FirstName
+        </Label>
+        <Input
+          type="text"
+          name="firstName"
+          onChange={(e)=>{setFirstName(e.target.value)}}
+          value={firstName}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="username" className="text-right">
+          LastName
+        </Label>
+        <Input
+          name="lastName"
+          onChange={(e)=>{setLastName(e.target.value)}}
+          value={lastName}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="name" className="text-right">
+          Age
+        </Label>
+        <Input
+          name="age"
+          onChange={(e)=>{setAge(e.target.value)}}
+          value={age}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="name" className="text-right">
+          Photo
+        </Label>
+        <Input
+          name="photoUrl"
+          onChange={(e)=>{setPhotoUrl(e.target.value)}}
+          value={photoUrl}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="name" className="text-right">
+          Gender
+        </Label>
+        {/* <Input
+          name="gender"
+          onChange={(e)=>{setGender(e.target.value)}}
+          value={gender}
+          className="col-span-3 text-black"
+        /> */}
+        <Select>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a Gender"/>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Gender</SelectLabel>
+            <SelectItem value="Male" onClick={(e)=>{setGender(Male)}}>Male</SelectItem>
+          <SelectItem value="Female" onClick={(e)=>{setGender(Female)}}>Female</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+        </Select>
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="name" className="text-right">
+          About
+        </Label>
+        <Input
+          name="about"
+          onChange={(e)=>{setAbout(e.target.value)}}
+          value={about}
+          className="col-span-3"
+        />
+      </div>
+    </div>
+    <CardFooter className="flex justify-between">
+               
+           <Button onClick ={handleSubmit
+
+           }>Save Profile</Button>
+          </CardFooter>
+    </Card>
+  )
+}
+
+export default ProfileEdit

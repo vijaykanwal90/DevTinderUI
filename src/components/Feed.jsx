@@ -12,31 +12,25 @@ const Feed = () => {
   const dispatch = useDispatch();
   const feed = useSelector((state) => state.feed);
 
-  // console.log("Feed data " + feed.length)
-  // const user = feed[0];
-  // console.log(user)
-
+ 
   const fetchData = async () => {
     try{
       const res = await axios.get("http://localhost:3000/feed", { withCredentials: true });
       // console.log(res.data[0]);
-      // const users = res.data;
-      // users.map((user)=>{
-      //   console.log( "hey this is user Data " + user.firstName)
-      // })
-      // console.log(typeof(users))
-      // console.log("hey is " + res.data.data)
+      
+      // console.log("hey is " + res)
       dispatch(addFeed(res?.data?.data));
     }
     catch(error){
       console.log("error is " + error.message)
     }
     
-    // setUsers(res.data);
+  
   };
-  // console.log(status)
+  
 
   useEffect(() => {
+    console.log("feed page loaded")
     fetchData();
   }, []);
 

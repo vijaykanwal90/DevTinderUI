@@ -6,19 +6,32 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../features/userSlice";
 import { addUser } from "../features/userSlice";
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
 // import Button from './Button'
 const Navbar = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const userData = useSelector((store)=>store.user)
   const user = useSelector((state) => state.user);
+  // console.log("in the use navbar after login")
+  // console.log(user)
   // const [isProfile, setIsProfile] = React.useState(false);
-  const userData = user.user;
-  // console.log("user Data at navbar "  + userData)
-
-  // console.log("hey user data at ui navbar" , userData)
+  // console.log(user)
+  // const fetchUserProfile = async ()=>{
+   
+  //   try {
+  //     const res = await axios.get("http://localhost:3000/profile", {
+  //       withCredentials: true,
+  //     });
+  //     console.log(res?.data?.data);
+  //     // setIsLoggedIn(true);
+  //     dispatch(addUser(res?.data?.data));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
   const logout = async () => {
     console.log("logout");
     try {
@@ -27,9 +40,10 @@ const Navbar = () => {
         {},
         { withCredentials: true }
       );
+      // setIsLoggedIn(false);
       dispatch(removeUser());
 
-      return navigate("/login");
+      navigate("/login");
     } catch (error) {
       if (res.status == 401) {
         navigate("/login");
@@ -38,10 +52,10 @@ const Navbar = () => {
     }
   };
  useEffect(() => {
-      if(user){
-        // setIsProfile(true)
-      }
- }),[]
+  
+ 
+  
+ },[])
   return (
     <>
       

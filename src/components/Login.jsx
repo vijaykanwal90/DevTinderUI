@@ -8,26 +8,34 @@ import Signup from './Signup'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../features/userSlice';
 const Login = () => {
-    const [email, setEmail] = useState('elon1234@gmail.com');
-    const [password, setPassword] = useState('Elon@1234');
+    const [email, setEmail] = useState('super@gmail.com');
+    const [password, setPassword] = useState('Super@123');
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         console.log(email)
-        try {
+        try {  
             const res = await axios.post(
                 'http://localhost:3000/login',
                 { email, password },
                 { withCredentials: true }
             );
+          
+            // console.log(res?.data?.data)
+
+
+            dispatch(addUser(res?.data?.data))
+            // navigate('/feed')
+
             if(res.status===200){
               navigate('/feed')
+          
             }
-            // console.log(res.data.user);
 
-            dispatch(addUser(res.data.user))
+        
+
         } catch (error) {
             console.log(error);
         }
