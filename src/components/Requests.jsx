@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { addRequest } from '@/features/requestSlice'
 import { removeRequest } from '@/features/requestSlice'
 import { Button } from './ui/button'
+import { ConstructionIcon } from 'lucide-react'
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((state )=> state.request)
@@ -14,7 +15,9 @@ const Requests = () => {
     try {
       console.log("on request review")
       const res = await axios.get("http://localhost:3000/user/received", {withCredentials: true})  
-      console.log("the response is " + JSON.stringify(res.data))
+      // console.log("the response is " + JSON.stringify(res.data))
+      console.log(res)
+      console.log(requests)
     dispatch(addRequest(res.data.connection))
     setRequest(res.data.connection)
     } catch (error) {
