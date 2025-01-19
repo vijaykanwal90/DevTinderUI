@@ -36,6 +36,7 @@ const ProfileEdit = ({isOpen,setIsOpen}) => {
   
         e.preventDefault();
         try{
+          
           const res = await axios.patch(
             "http://localhost:3000/profile/edit",
             {firstName,lastName,age,photoUrl
@@ -124,15 +125,15 @@ const ProfileEdit = ({isOpen,setIsOpen}) => {
           value={gender}
           className="col-span-3 text-black"
         /> */}
-        <Select>
+        <Select value={gender} onValueChange={(value)=>setGender(value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select a Gender"/>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Gender</SelectLabel>
-            <SelectItem value="Male" onClick={(e)=>{setGender(Male)}}>Male</SelectItem>
-          <SelectItem value="Female" onClick={(e)=>{setGender(Female)}}>Female</SelectItem>
+            <SelectItem value="male" >Male</SelectItem>
+          <SelectItem   value="female">Female</SelectItem>
           </SelectGroup>
         </SelectContent>
         </Select>
