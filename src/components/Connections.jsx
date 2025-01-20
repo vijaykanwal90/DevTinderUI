@@ -2,26 +2,28 @@ import React, {useState , useEffect} from 'react'
 import axios from 'axios'
 import { addConnection } from '@/features/connectionSlice'
 import { useDispatch } from 'react-redux'
-// import { useSelect } from '@nextui-org/react'
+import { Skeleton } from "../components/ui/skeleton";
+
 import { useSelector } from 'react-redux'
 const Connections = () => {
-  const [connection, setConnection] = useState([])
+  // const [connection, setConnection] = useState([])
 
   const dispatch = useDispatch()
-  const connections = useSelector((store) => store.connection)
-  // console.log(connections?.fromUserId?.firstName)
+  const connection = useSelector((store) => store.connection)
+  // console.log(connection[0].connection.firstName)
+  // console.log(connection?.connection?.firstName)
+  // console.log(connection)
 
-  // const {firstName} = connections.fromUserId
-  // console.log("connections data")
-  // console.log(firstName)
   const getConnections = async()=>{
     try {
       const res = await axios.get('http://localhost:3000/user/connections',{withCredentials:true})
-      console.log(res.data.connection)
+      // console.log(res.data.connection)
       // setConnections(res.data.connection)
-      
-      dispatch(addConnection(res.data.connection))
-      setConnection(res.data.connection)
+      // console.log('this is response from api')
+      // console.log(res)
+      // console.log(res.data.connection[0].connection)
+      dispatch(addConnection(res?.data.connection))
+      // setConnection(res.data.connection)
       
       // console.log("the connections are " + connections)
     } catch (error) {
@@ -29,12 +31,16 @@ const Connections = () => {
     }
   }
   useEffect(()=>{
+    setTimeout(() => {
+    
+    },5000)
     getConnections()
   },[])
-  if(!connections){
-    return <h1>Loading...</h1>
+  if(!connection){
+    return <Skeleton className="w-[100px] h-[20px] rounded-full" />
+
   }
-  if(connections.length===0){
+  if(connection.length===0){
     return <h1>No Connections</h1>
   }
   return (
@@ -42,7 +48,7 @@ const Connections = () => {
   <div className='w-full max-w-md mx-auto'>
     <h1 className='font-bold text-3xl text-center mb-6 text-gray-800'>Connections</h1>
     {connection.map((connection) => {
-      const { _id , firstName, lastName, photoUrl, about } = connection.fromUserId;
+      const { _id , firstName, lastName, photoUrl, about } = connection.connection;
       return (
         <div  key = {_id} className="flex items-center my-5 bg-gray-200 p-4 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-gray-300">
           <div className="mr-4 flex-shrink-0">
@@ -51,7 +57,7 @@ const Connections = () => {
               alt={`${firstName} ${lastName}`}
               width={48}
               height={48}
-              className="rounded-full object-cover"
+              className="rounded object-cover"
             />
           </div>
           <div className="flex-grow">

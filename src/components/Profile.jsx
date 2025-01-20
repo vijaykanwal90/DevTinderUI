@@ -15,6 +15,7 @@ import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import { addUser } from '../features/userSlice'
 import ProfileEdit from './ProfileEdit'
+import { Image } from 'lucide-react'
 const Profile = () => {
  
   const user = useSelector((state) => state.user)
@@ -44,15 +45,15 @@ const Profile = () => {
 
       <div className='flex gap-4 justify-end'>
         <div> 
-        <Card className="w-[350px]">
+        <Card className="w-[325px] h-[400px]">
       <CardHeader>
         <CardTitle>{user?.firstName + " " + user?.lastName}</CardTitle>
         <CardDescription>{user?.age + " " + user?.about + " " + user?.gender}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex justify-center w-full">
         <img src={user?.photoUrl} alt="" />
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="mt-12 flex justify-between">
                    
                <Button onClick ={handleIsOpen
 

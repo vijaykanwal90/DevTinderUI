@@ -18,7 +18,7 @@ const Body = () => {
     try {
       
         const res = await axios.get('http://localhost:3000/profile', { withCredentials: true });
-        console.log(res);
+        // console.log(res);
         dispatch(addUser(res?.data?.data)); // Save user data to store
       
     } catch (error) {

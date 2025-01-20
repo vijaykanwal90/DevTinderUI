@@ -66,8 +66,8 @@ const ProfileEdit = ({isOpen,setIsOpen}) => {
   
       };
   return (
-    <Card className="w-[350px]">
-    <CardTitle>Edit Profile</CardTitle>
+    <Card className="w-[325px] h-[400px]">
+    <CardTitle className="text-center my-2">Edit Profile</CardTitle>
 
     <div className="grid gap-4 py-4">
       <div className="grid grid-cols-4 items-center gap-4">

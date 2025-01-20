@@ -30,7 +30,7 @@ const Feed = () => {
   
 
   useEffect(() => {
-    console.log("feed page loaded")
+    // console.log("feed page loaded")
     fetchData();
   }, []);
 
