@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 import { addUser } from '../features/userSlice';
+import { NavbarItem } from '@nextui-org/react';
 
 const Body = () => {
   const user= useSelector((store) => store.user);
@@ -14,18 +15,12 @@ const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const fetchUser = async () => {
-
-   
-
     try {
-      // if(!user){
-      //   return ;
-      // }
-      // console.log(user)
       
-      const res = await axios.get('http://localhost:3000/profile', { withCredentials: true });
-      // console.log(res);
-      dispatch(addUser(res?.data?.data)); // Save user data to store
+        const res = await axios.get('http://localhost:3000/profile', { withCredentials: true });
+        console.log(res);
+        dispatch(addUser(res?.data?.data)); // Save user data to store
+      
     } catch (error) {
       if (error.response && error.response.status === 401) {
         navigate('/login'); // Redirect if 401 error (unauthorized)
@@ -33,8 +28,11 @@ const Body = () => {
       console.log(error);
     }
   };
+  
   useEffect(() => {
-    
+    if(!user){
+      navigate('/feed')
+    }
           
     fetchUser();
   }, []); // Run effect when userData changes

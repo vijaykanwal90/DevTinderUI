@@ -7,9 +7,12 @@ import feed from './Feed'
 import Signup from './Signup'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../features/userSlice';
+import { Card } from './ui/card';
+import { toast } from 'sonner';
+import { Label } from './ui/label';
 const Login = () => {
-    const [email, setEmail] = useState('super@gmail.com');
-    const [password, setPassword] = useState('Super@123');
+    const [email, setEmail] = useState('harry123@gmail.com');
+    const [password, setPassword] = useState('Harry@123');
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
@@ -25,6 +28,7 @@ const Login = () => {
           
             // console.log(res?.data?.data)
 
+            toast.success('logged in successfully')
 
             dispatch(addUser(res?.data?.data))
             // navigate('/feed')
@@ -38,19 +42,21 @@ const Login = () => {
 
         } catch (error) {
             console.log(error);
+            toast.error('Something went wrong')
+
         }
     };
 
     return (
       
-        <form
-            className="w-full max-w-md flex flex-col gap-6 bg-white p-6 shadow-md rounded-lg"
+        <Card
+            className=" w-full  max-w-md flex flex-col gap-6 bg-white p-6 shadow-md rounded-lg"
              // Form submission handled here
         > 
-        <h2 className='text-black text-center'>Login</h2>
-        <label className='text-black' htmlFor="email">
+        <h2 className='text-orange-400 text-xl font-bold text-center'>Login</h2>
+        <Label className='text-black' htmlFor="email">
                 Email
-              </label>
+              </Label>
             <Input
                 required
                 errorMessage="Please enter a valid Email"
@@ -64,9 +70,9 @@ const Login = () => {
                 value={email}
             />
               
-              <label className='text-black' htmlFor="password">
+              <Label className='text-black' htmlFor="password">
                 Password
-              </label>
+              </Label>
             <Input
                 required
                 errorMessage="Please enter a valid password"
@@ -84,18 +90,18 @@ const Login = () => {
                 <Button
                     color="primary"
                     onClick={handleSubmit}// Button type set to submit for form submission
-                    className="bg-blue-500 text-white w-full py-2 rounded-lg hover:bg-blue-600"
+                    className="bg-orange-500 text-primary text-xl w-full py-2 rounded-lg hover:bg-orange-600"
                 >
                     Submit
                 </Button>
             </div>
               <p className="text-center text-sm text-gray-600">
                       Don't have account?{' '}
-                      <Link to="/signup" className="text-indigo-600 hover:text-indigo-500">
+                      <Link to="/signup" className="text-orange-500 hover:text-indigo-500">
                         Sign Up
                       </Link>
                     </p>
-        </form>
+        </Card>
     );
 };
 

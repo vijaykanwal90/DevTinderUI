@@ -8,7 +8,8 @@ import { Button } from './ui/button'
 import { ConstructionIcon } from 'lucide-react'
 const Requests = () => {
   const dispatch = useDispatch();
-  const requests = useSelector((state )=> state.request)
+  const requests = useSelector((store )=> store.request)
+  // console.log(requests[0].fromUserId.firstName)
   const [request, setRequest] = useState([])
   const fetchRequests = async ()=>{
     
@@ -16,8 +17,8 @@ const Requests = () => {
       console.log("on request review")
       const res = await axios.get("http://localhost:3000/user/received", {withCredentials: true})  
       // console.log("the response is " + JSON.stringify(res.data))
-      console.log(res)
-      console.log(requests)
+      // console.log(res)
+      // console.log(requests)
     dispatch(addRequest(res.data.connection))
     setRequest(res.data.connection)
     } catch (error) {
@@ -27,8 +28,10 @@ const Requests = () => {
     
   }
   const handleClick = (status,userId)=> async()=>{
-    console.log("on review request button click")
-    const res = await axios.post("http://localhost:3000/reviewConnectionRequest/"+status+ "/" + userId,{}, {withCredentials:true})
+    
+    
+    const res = await axios.post("http://localhost:3000/reviewConnectionRequest/"+ status + "/" + userId,{}, {withCredentials:true})
+    
     dispatch(removeRequest(res.userId))
   }
   useEffect(()=>{
@@ -45,7 +48,7 @@ const Requests = () => {
  <div className='my-10 flex justify-center'>
   <div className='w-full max-w-md mx-auto'>
     <h1 className='font-bold text-3xl text-center mb-6 text-gray-800'>Requests</h1>
-    {request.map((request) => {
+    {requests.map((request) => {
       const { firstName, lastName, photoUrl, about } = request.fromUserId;
       return (
         <div key={request._id} className="flex items-center my-5 bg-gray-200 p-4 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-gray-300">

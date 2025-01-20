@@ -35,7 +35,7 @@ const Feed = () => {
   }, []);
 
  if(!feed){
-  return <h1>Loading...</h1>
+  return <div></div>
  }
  if(feed.length===0){
   return <h1>No feed Data</h1>
