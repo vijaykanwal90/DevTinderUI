@@ -1,36 +1,12 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { removeFeed } from "../features/feedSlice";
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
-import axios from "axios";
-const UserCard = ({ user }) => {
-  // const user = useSelector((state) => state.feed);
-  // const [status , setStatus] = useState('')
-  // const [toUser, setToUser] = useState('');
-  const dispatch = useDispatch();
-  const { _id, firstName, lastName, photoUrl, about } = user;
-  const feed = useSelector((state) => state.feed);
-  // console.log("feed data is " + toUser)
-  const requestSent = (status, toUser) => async () => {
-    // console.log("status is "  + status  + " " + " userId is " +  toUser)
-    try {
-      const res = await axios.post(
-        `http://localhost:3000/sendConnectionRequest/${status}/${toUser}`,
-        {},
-        { withCredentials: true }
-      );
-      // console.log(res.data)
-      console.log("the status i s")
-      console.log(status)
+import React from "react";
 
-      // console.log("action take in revie")
-      dispatch(removeFeed(toUser));
-    } catch (error) {
-      console.log("error is " + error.message);
-    }
-  };
-  // console.log( " from user Card " + firstName)
+import { Card, CardHeader, CardBody} from "@nextui-org/react";
+
+const UserCard = ({ user ,requestSent}) => {
+ 
+  const { _id, firstName, lastName, photoUrl, about } = user;
+  // const feed = useSelector((state) => state.feed);
+  
   return (
     <div>
       <Card key={user._id} className="py-4 bg-gray-500 m-4">
@@ -43,7 +19,7 @@ const UserCard = ({ user }) => {
         </CardHeader>
         <CardBody className="overflow-visible py-2">
           <img
-            alt="Card background"
+            alt="image"
             className="object-cover rounded-xl"
             src={photoUrl}
             width={270}
