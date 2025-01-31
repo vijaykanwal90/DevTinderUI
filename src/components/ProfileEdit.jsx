@@ -34,9 +34,9 @@ const ProfileEdit = ({isOpen,setIsOpen}) => {
   
     const handleSubmit = async (e) => {
   
-        e.preventDefault();
+        // e.preventDefault();
         try{
-          
+          console.log("submitting form data",firstName, " ", gender);
           const res = await axios.patch(
             "http://localhost:3000/profile/edit",
             {firstName,lastName,age,photoUrl
@@ -44,6 +44,7 @@ const ProfileEdit = ({isOpen,setIsOpen}) => {
             },
             { withCredentials: true }
           );
+          console.log(res)
           // console.log("submitted form data" + JSON.stringify(formData));
           if (res.status == 200) {
             // console.log("profile updated successfully");

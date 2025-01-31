@@ -51,7 +51,7 @@ const Body = () => {
       </div>
 
       {/* Footer at the bottom */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
