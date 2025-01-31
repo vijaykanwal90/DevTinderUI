@@ -38,7 +38,7 @@ const Body = () => {
   }, []); // Run effect when userData changes
 
   return (
-    <div className="min-h-screen flex flex-col bg-black text-white">
+    <div className="min-h-screen flex flex-col bg-white text-black">
       {/* Navbar at the top */}
       
       <Navbar />
