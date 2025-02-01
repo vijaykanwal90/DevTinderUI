@@ -8,6 +8,8 @@ import Signup from './Signup'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../features/userSlice';
 import { Card } from './ui/card';
+import { BASE_URL } from "../utils/constants";
+
 import { toast } from 'sonner';
 import { Label } from './ui/label';
 const Login = () => {
@@ -21,7 +23,7 @@ const Login = () => {
         console.log(email)
         try {  
             const res = await axios.post(
-                'http://localhost:3000/login',
+                `${BASE_URL}/login`,
                 { email, password },
                 { withCredentials: true }
             );

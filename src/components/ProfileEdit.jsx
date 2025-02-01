@@ -5,6 +5,8 @@ import { Label } from './ui/label'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { useState } from 'react'
+import { BASE_URL } from "../utils/constants";
+
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../features/userSlice'
@@ -38,7 +40,7 @@ const ProfileEdit = ({isOpen,setIsOpen}) => {
         try{
           console.log("submitting form data",firstName, " ", gender);
           const res = await axios.patch(
-            "http://localhost:3000/profile/edit",
+            `${BASE_URL}/profile/edit`,
             {firstName,lastName,age,photoUrl
               ,gender,about
             },

@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../features/userSlice";
 import { addUser } from "../features/userSlice";
+import { BASE_URL } from "../utils/constants";
+
 import { useEffect ,useState} from "react";
 // import Button from './Button'
 const Navbar = () => {
@@ -22,7 +24,7 @@ const Navbar = () => {
     console.log("logout");
     try {
       const res = await axios.post(
-        "http://localhost:3000/logout",
+        `${BASE_URL}/logout`,
         {},
         { withCredentials: true }
       );

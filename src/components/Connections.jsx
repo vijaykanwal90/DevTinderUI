@@ -3,6 +3,7 @@ import axios from 'axios'
 import { addConnection } from '@/features/connectionSlice'
 import { useDispatch } from 'react-redux'
 import { Skeleton } from "../components/ui/skeleton";
+import { BASE_URL } from "../utils/constants";
 
 import { useSelector } from 'react-redux'
 const Connections = () => {
@@ -16,7 +17,7 @@ const Connections = () => {
 
   const getConnections = async()=>{
     try {
-      const res = await axios.get('http://localhost:3000/user/connections',{withCredentials:true})
+      const res = await axios.get(`${BASE_URL} + /user/connections`,{withCredentials:true})
       // console.log(res.data.connection)
       // setConnections(res.data.connection)
       // console.log('this is response from api')

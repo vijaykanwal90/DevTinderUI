@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { addUser } from '../features/userSlice';
 import { NavbarItem } from '@nextui-org/react';
+import { BASE_URL } from "../utils/constants";
 
 const Body = () => {
   const user= useSelector((store) => store.user);
@@ -17,7 +18,7 @@ const Body = () => {
   const fetchUser = async () => {
     try {
       
-        const res = await axios.get('http://localhost:3000/profile', { withCredentials: true });
+        const res = await axios.get(`${BASE_URL}/profile`, { withCredentials: true });
         // console.log(res);
         dispatch(addUser(res?.data?.data)); // Save user data to store
       

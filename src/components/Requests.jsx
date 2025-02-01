@@ -6,6 +6,8 @@ import { addRequest } from '@/features/requestSlice'
 import { removeRequest } from '@/features/requestSlice'
 import { Button } from './ui/button'
 import { ConstructionIcon } from 'lucide-react'
+import { BASE_URL } from "../utils/constants";
+
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store )=> store.request)
@@ -15,7 +17,7 @@ const Requests = () => {
     
     try {
       console.log("on request review")
-      const res = await axios.get("http://localhost:3000/user/received", {withCredentials: true})  
+      const res = await axios.get(`${BASE_URL}/user/received`, {withCredentials: true})  
       // console.log("the response is " + JSON.stringify(res.data))
       // console.log(res)
       // console.log(requests)
@@ -30,7 +32,7 @@ const Requests = () => {
   const handleClick = (status,userId)=> async()=>{
     
     
-    const res = await axios.post("http://localhost:3000/reviewConnectionRequest/"+ status + "/" + userId,{}, {withCredentials:true})
+    const res = await axios.post(`${BASE_URL}/reviewConnectionRequest/`+ status + "/" + userId,{}, {withCredentials:true})
     
     dispatch(removeRequest(res.userId))
   }

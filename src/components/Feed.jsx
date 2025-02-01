@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addFeed, removeFeed } from '../features/feedSlice';
 import { motion, AnimatePresence } from 'framer-motion';
 import UserCard from './UserCard';
+import { BASE_URL } from "../utils/constants";
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Feed = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/feed', { withCredentials: true });
+      const res = await axios.get(`${BASE_URL}/feed`, { withCredentials: true });
       dispatch(addFeed(res?.data?.data));
     } catch (error) {
       console.log('Error fetching feed data: ' + error.message);
@@ -25,7 +26,7 @@ const Feed = () => {
     setStatus(newStatus);
     try {
       await axios.post(
-        `http://localhost:3000/sendConnectionRequest/${newStatus}/${toUser}`,
+        `${BASE_URL}/sendConnectionRequest/${newStatus}/${toUser}`,
         {},
         { withCredentials: true }
       );

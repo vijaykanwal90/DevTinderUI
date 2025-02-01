@@ -14,6 +14,8 @@ import {
   CardFooter
 } from "./ui/card"
 import { Badge } from "./ui/badge"
+import { BASE_URL } from "../utils/constants";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CalendarIcon, MapPinIcon, UserIcon, CameraIcon, EditIcon } from 'lucide-react'
 import { addUser } from '../features/userSlice'
@@ -26,7 +28,7 @@ const Profile = () => {
   const dispatch = useDispatch()
 
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:3000/profile", { withCredentials: true });
+    const res = await axios.get(`${BASE_URL}/profile`, { withCredentials: true });
     dispatch(addUser(res?.data?.data))
   }
 
