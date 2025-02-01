@@ -8,7 +8,7 @@ import { BASE_URL } from "../constants";
 import { useSelector } from 'react-redux'
 const Connections = () => {
   // const [connection, setConnection] = useState([])
-
+  // console.log(BASE_URL)
   const dispatch = useDispatch()
   const connection = useSelector((store) => store.connection)
   // console.log(connection[0].connection.firstName)
@@ -17,7 +17,7 @@ const Connections = () => {
 
   const getConnections = async()=>{
     try {
-      const res = await axios.get(`${BASE_URL} + /user/connections`,{withCredentials:true})
+      const res = await axios.get(`${BASE_URL}/user/connections`,{withCredentials:true})
       // console.log(res.data.connection)
       // setConnections(res.data.connection)
       // console.log('this is response from api')

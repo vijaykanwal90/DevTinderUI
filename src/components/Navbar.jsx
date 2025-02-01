@@ -59,7 +59,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search"
-                className="input input-bordered w-24 md:w-auto text-black h-10"
+                className="input input-bordered w-24 md:w-auto text-black bg-gray-300 h-10"
               />
             </div>
             <p className="hidden sm:inline">Hello {user?.firstName}</p>

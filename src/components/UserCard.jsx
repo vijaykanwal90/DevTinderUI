@@ -9,7 +9,7 @@ const UserCard = ({ user ,requestSent}) => {
   
   return (
     <div>
-      <Card key={user._id} className="py-4 bg-gray-500 m-4">
+      <Card key={user._id} className="py-4 bg-gray-300 m-4">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">
             {firstName + " " + lastName}

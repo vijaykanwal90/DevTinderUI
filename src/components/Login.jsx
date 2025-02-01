@@ -13,11 +13,11 @@ import { BASE_URL } from "../constants";
 import { toast } from 'sonner';
 import { Label } from './ui/label';
 const Login = () => {
-    const [email, setEmail] = useState('harry123@gmail.com');
-    const [password, setPassword] = useState('Harry@123');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch()
-
+    // console.log(BASE_URL)
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(email)
