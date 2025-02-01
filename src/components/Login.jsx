@@ -8,7 +8,7 @@ import Signup from './Signup'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../features/userSlice';
 import { Card } from './ui/card';
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../constants";
 
 import { toast } from 'sonner';
 import { Label } from './ui/label';

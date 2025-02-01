@@ -6,7 +6,7 @@ import { addRequest } from '@/features/requestSlice'
 import { removeRequest } from '@/features/requestSlice'
 import { Button } from './ui/button'
 import { ConstructionIcon } from 'lucide-react'
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../constants";
 
 const Requests = () => {
   const dispatch = useDispatch();

@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addFeed, removeFeed } from '../features/feedSlice';
 import { motion, AnimatePresence } from 'framer-motion';
 import UserCard from './UserCard';
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../constants";
+
 
 const Feed = () => {
   const dispatch = useDispatch();

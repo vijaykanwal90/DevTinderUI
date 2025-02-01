@@ -3,7 +3,7 @@ import axios from 'axios'
 import { addConnection } from '@/features/connectionSlice'
 import { useDispatch } from 'react-redux'
 import { Skeleton } from "../components/ui/skeleton";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../constants";
 
 import { useSelector } from 'react-redux'
 const Connections = () => {

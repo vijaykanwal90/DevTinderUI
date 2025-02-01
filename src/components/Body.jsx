@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { addUser } from '../features/userSlice';
 import { NavbarItem } from '@nextui-org/react';
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../constants";
 
 const Body = () => {
   const user= useSelector((store) => store.user);

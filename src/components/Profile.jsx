@@ -14,7 +14,7 @@ import {
   CardFooter
 } from "./ui/card"
 import { Badge } from "./ui/badge"
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../constants";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CalendarIcon, MapPinIcon, UserIcon, CameraIcon, EditIcon } from 'lucide-react'

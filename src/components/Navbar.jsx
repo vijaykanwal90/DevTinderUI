@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../features/userSlice";
 import { addUser } from "../features/userSlice";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../constants";
 
 import { useEffect ,useState} from "react";
 // import Button from './Button'

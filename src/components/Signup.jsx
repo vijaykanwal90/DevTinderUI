@@ -7,7 +7,8 @@ import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { useDispatch } from "react-redux";
 import { addUser } from "../features/userSlice";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../constants";
+
 const Signup = () => {
   const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
