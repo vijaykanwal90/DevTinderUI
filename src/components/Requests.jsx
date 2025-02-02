@@ -40,12 +40,16 @@ const Requests = () => {
     fetchRequests()
   },[])
 
+ 
  if(!request){
     return <h1>Loading...</h1>
  }
-  if(request.length===0){
-    return <h1>No Requests</h1>
-  }
+ if(request.length===0){
+  return <div className='min-h-[70vh] flex items-center justify-center bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent '>
+  No Requests
+
+</div>;
+}
   return (
  <div className='my-10 flex justify-center'>
   <div className='w-full max-w-md mx-auto'>

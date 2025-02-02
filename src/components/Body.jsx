@@ -32,7 +32,7 @@ const Body = () => {
   
   useEffect(() => {
     if(!user){
-      navigate('/feed')
+      navigate('/login')
     }
           
     fetchUser();

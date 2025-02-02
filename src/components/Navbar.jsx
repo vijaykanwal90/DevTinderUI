@@ -49,7 +49,7 @@ const Navbar = () => {
       
         <div className="navbar text-black bg-white shadow-lg">
           <div className="flex-1">
-            <Link to={"/feed"} className="btn btn-ghost text-xl">
+            <Link to={"/feed"} className="bg-gradient-to-r from-orange-400 to-red-500 text-xl font-bold text-center bg-clip-text text-transparent p-2">
               DevTinder
             </Link>
           </div>
@@ -62,7 +62,7 @@ const Navbar = () => {
                 className="input input-bordered w-24 md:w-auto text-black bg-gray-300 h-10"
               />
             </div>
-            <p className="hidden sm:inline">Hello {user?.firstName}</p>
+            <p className="hidden sm:inline bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent ">Hello {user?.firstName}</p>
             <div className="dropdown dropdown-end mx-4">
               <div
                 tabIndex={0}

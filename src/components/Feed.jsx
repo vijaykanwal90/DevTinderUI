@@ -50,7 +50,10 @@ const Feed = () => {
   }, []);
 
   if (!feed || feed.length === 0) {
-    return <h1>No Feed Data</h1>;
+    return <div className='min-h-[70vh] flex items-center justify-center bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent '>
+      No users to show!
+
+    </div>;
   }
 
   return (

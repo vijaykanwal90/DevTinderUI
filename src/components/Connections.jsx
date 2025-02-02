@@ -42,7 +42,10 @@ const Connections = () => {
 
   }
   if(connection.length===0){
-    return <h1>No Connections</h1>
+    return <div className='min-h-[70vh] flex items-center justify-center bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent '>
+    No Connections
+
+  </div>;
   }
   return (
  <div className='my-10 flex justify-center'>

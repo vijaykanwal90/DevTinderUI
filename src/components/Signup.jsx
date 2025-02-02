@@ -51,10 +51,10 @@ const Signup = () => {
 
   return (
     <Card
-      className=" w-full  max-w-md flex flex-col gap-6 bg-white p-6 shadow-md rounded-lg"
+      className=" w-full  max-w-md flex flex-col gap-6 bg-white p-6  border-4 shadow-lg rounded-lg my-4"
       // Form submission handled here
     >
-      <h2 className="text-orange-400 text-xl font-bold text-center">SignUp</h2>
+      <h2 className="bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent ">SignUp</h2>
       <Label className="block text-sm font-medium text-gray-700">
         Firstname
       </Label>
@@ -115,14 +115,14 @@ const Signup = () => {
         <Button
           color="primary"
           onClick={handleSubmit} // Button type set to submit for form submission
-          className="bg-orange-500 text-primary text-xl w-full py-2 rounded-lg hover:bg-orange-600"
+          className="bg-gradient-to-r from-orange-400 to-red-500 text-xl font-bold text-center  w-full py-2 rounded-lg hover:bg-orange-600"
         >
           Submit
         </Button>
       </div>
       <p className="text-center text-sm text-gray-600">
         Don't have account?{" "}
-        <Link to="/login" className="text-orange-500 hover:text-indigo-500">
+        <Link to="/login" className="bg-gradient-to-r from-orange-400 to-red-500 text-xl font-bold text-center bg-clip-text text-transparent hover:text-indigo-500">
           Login
         </Link>
       </p>

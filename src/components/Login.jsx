@@ -9,12 +9,13 @@ import { useDispatch } from 'react-redux';
 import { addUser } from '../features/userSlice';
 import { Card } from './ui/card';
 import { BASE_URL } from "../constants";
-
-import { toast } from 'sonner';
+import {toast} from "sonner"
+// import { toast } from 'sonner';
 import { Label } from './ui/label';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [text, setText] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch()
     // console.log(BASE_URL)
@@ -22,12 +23,16 @@ const Login = () => {
         e.preventDefault();
         console.log(email)
         try {  
+            // const res = await axios.post(
+            //     `${BASE_URL}/login`,
+            //     { email, password },
+            //     { withCredentials: true }
+            // );
             const res = await axios.post(
-                `${BASE_URL}/login`,
-                { email, password },
-                { withCredentials: true }
-            );
-          
+              `http://localhost:3000/login`,
+              { email, password },
+              { withCredentials: true }
+          );
             // console.log(res?.data?.data)
 
             toast.success('logged in successfully')
@@ -44,7 +49,10 @@ const Login = () => {
 
         } catch (error) {
             console.log(error);
-            toast.error('Something went wrong')
+            // console.log(res)
+            // setText(error.response.data.message)
+            // setText('Invalid email or password')
+            toast.error('Check your credentials')
 
         }
     };
@@ -52,10 +60,10 @@ const Login = () => {
     return (
       
         <Card
-            className=" w-full  max-w-md flex flex-col gap-6 bg-white p-6 shadow-md rounded-lg"
+            className=" w-full  max-w-md flex flex-col gap-6 bg-white p-6 border-4 shadow-lg rounded-lg"
              // Form submission handled here
         > 
-        <h2 className='text-orange-400 text-xl font-bold text-center'>Login</h2>
+        <h2 className='bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent '>Login</h2>
         <Label className='text-black' htmlFor="email">
                 Email
               </Label>
@@ -81,25 +89,25 @@ const Login = () => {
                 
                 labelPlacement="outside"
                 name="password"
-                placeholder=""
+                placeholder="Enter your password"
                 type="password" // Set to password type
                 className="text-black"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
             />
-
+            <p className="text-red-500 text-center">{text}</p>
             <div className="flex justify-center">
                 <Button
                     color="primary"
                     onClick={handleSubmit}// Button type set to submit for form submission
-                    className="bg-orange-500 text-primary text-xl w-full py-2 rounded-lg hover:bg-orange-600"
+                    className="bg-gradient-to-r from-orange-400 to-red-500 text-primary text-xl w-full py-2 rounded-lg hover:bg-orange-600"
                 >
-                    Submit
+                    Login
                 </Button>
             </div>
               <p className="text-center text-sm text-gray-600">
                       Don't have account?{' '}
-                      <Link to="/signup" className="text-orange-500 hover:text-indigo-500">
+                      <Link to="/signup" className="bg-gradient-to-r from-orange-400 to-red-500 text-xl font-bold text-center bg-clip-text text-transparent hover:text-indigo-500">
                         Sign Up
                       </Link>
                     </p>
