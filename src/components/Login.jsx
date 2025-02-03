@@ -23,18 +23,19 @@ const Login = () => {
         e.preventDefault();
         console.log(email)
         try {  
-            // const res = await axios.post(
-            //     `${BASE_URL}/login`,
-            //     { email, password },
-            //     { withCredentials: true }
-            // );
+          console.log(`${BASE_URL}/login`);
             const res = await axios.post(
-              `http://localhost:3000/login`,
-              { email, password },
-              { withCredentials: true }
-          );
+                `${BASE_URL}/login`,
+                { email, password },
+                { withCredentials: true }
+            );
+          //   const res = await axios.post(
+          //     `http://localhost:3000/login`,
+          //     { email, password },
+          //     { withCredentials: true }
+          // );
             // console.log(res?.data?.data)
-
+          console.log(res)
             toast.success('logged in successfully')
 
             dispatch(addUser(res?.data?.data))
