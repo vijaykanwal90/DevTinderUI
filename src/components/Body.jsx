@@ -24,7 +24,7 @@ const Body = () => {
       
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        navigate('/login'); // Redirect if 401 error (unauthorized)
+        navigate(`${BASE_URL}/login`); // Redirect if 401 error (unauthorized)
       }
       console.log(error);
     }

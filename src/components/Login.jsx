@@ -23,7 +23,7 @@ const Login = () => {
         e.preventDefault();
         console.log(email)
         try {  
-          console.log(`${BASE_URL}/login`);
+          // console.log(`${BASE_URL}/login`);
             const res = await axios.post(
                 `${BASE_URL}/login`,
                 { email, password },
