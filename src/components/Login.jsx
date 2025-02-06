@@ -53,13 +53,13 @@ const Login = () => {
             // console.log(res)
             // setText(error.response.data.message)
             // setText('Invalid email or password')
-            if(error.response.status===401){
+            // if(error.response.status===401){
               toast.error('Invalid email or password')
-            }
-            else {
-              toast.error('network error')
+            // }
+            // else {
+              // toast.error('network error')
 
-            }
+            // }
 
         }
     };
