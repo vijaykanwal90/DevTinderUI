@@ -23,9 +23,9 @@ const Body = () => {
         dispatch(addUser(res?.data?.data)); // Save user data to store
       
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        navigate(`${BASE_URL}/login`); // Redirect if 401 error (unauthorized)
-      }
+      // if (error.response && error.response.status === 401) {
+      //   navigate(`${BASE_URL}/login`); // Redirect if 401 error (unauthorized)
+      // }
       console.log(error);
     }
   };
