@@ -24,20 +24,23 @@ const Login = () => {
         console.log(email)
         try {  
           // console.log(`${BASE_URL}/login`);
-            const res = await axios.post(
-                `${BASE_URL}/login`,
-                { email, password },
-                { withCredentials: true,
-                  headers: {
-                    'Content-Type': 'application/json',
-                },
-                }
-            );
-          //   const res = await axios.post(
-          //     `http://localhost:3000/login`,
-          //     { email, password },
-          //     { withCredentials: true }
-          // );
+            // const res = await axios.post(
+            //     `${BASE_URL}/login`,
+            //     { email, password },
+            //     { withCredentials: true,
+            //       headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     }
+            // );
+            const res = await fetch(`${BASE_URL}/login`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ email, password }),
+            });
+            
             // console.log(res?.data?.data)
           console.log(res)
             toast.success('logged in successfully')
