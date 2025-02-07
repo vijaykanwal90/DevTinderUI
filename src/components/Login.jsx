@@ -27,7 +27,11 @@ const Login = () => {
             const res = await axios.post(
                 `${BASE_URL}/login`,
                 { email, password },
-                { withCredentials: true }
+                { withCredentials: true,
+                  headers: {
+                    'Content-Type': 'application/json',
+                },
+                }
             );
           //   const res = await axios.post(
           //     `http://localhost:3000/login`,
