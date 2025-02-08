@@ -95,6 +95,11 @@ const Navbar = () => {
                   <Link to={"/requests"}>Requests</Link>
                 </li>
                 <li>
+                  <Link className="justify-between" to={"/upgrade"}>
+                    Upgrade
+                  </Link>
+                </li>
+                <li>
                   <button onClick={logout}>Logout</button>
                 </li>
               </ul>

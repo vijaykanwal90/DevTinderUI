@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 import store from "./Store/store";
 import { Provider } from "react-redux";
+import Upgrade from "./components/Upgrade";
 import { NextUIProvider } from "@nextui-org/react";
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/connections" element={<Connections />} />
                 <Route path="/requests" element={<Requests />} />
+                <Route path="/Upgrade" element={<Upgrade />} />
+
                 <Route path="/feed" element={<Feed />} />
               </Route>
             </Routes>
