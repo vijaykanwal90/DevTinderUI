@@ -6,7 +6,7 @@ const UserCard = ({ user ,requestSent}) => {
  
   const { _id, firstName, lastName, photoUrl, about } = user;
   // const feed = useSelector((state) => state.feed);
-  console.log(firstName, "in usercard")
+  // console.log(firstName, "in usercard")
   
   return (
     <div>

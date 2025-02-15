@@ -31,9 +31,13 @@ const Body = () => {
   };
   
   useEffect(() => {
-    if(!user){
-      navigate('/login')
+    
+    if(user){
+      navigate('/feed')
     }
+    // if(!user){
+    //   navigate('/login')
+    // }
           
     fetchUser();
   }, []); // Run effect when userData changes

@@ -4,7 +4,7 @@ import { addConnection } from '@/features/connectionSlice'
 import { useDispatch } from 'react-redux'
 import { Skeleton } from "../components/ui/skeleton";
 import { BASE_URL } from "../constants";
-
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 const Connections = () => {
   // const [connection, setConnection] = useState([])
@@ -67,6 +67,12 @@ const Connections = () => {
           <div className="flex-grow">
             <h2 className="font-semibold text-lg text-gray-800">{firstName} {lastName}</h2>
             <p className="text-sm text-gray-600 line-clamp-2">{about}</p>
+          </div>
+          <div>
+            <Link to={"/chat/"+_id }>
+            <button className=' text-white bg-black px-4 py-2 border rounded-lg  cursor-pointer hover:shadow-xl shadow-black'>
+            Chat</button>
+            </Link>
           </div>
         </div>
       );

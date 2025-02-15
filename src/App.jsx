@@ -9,6 +9,7 @@ import Signup from "./components/Signup";
 import store from "./Store/store";
 import { Provider } from "react-redux";
 import Upgrade from "./components/Upgrade";
+import Chat from "./components/Chat"; 
 import { NextUIProvider } from "@nextui-org/react";
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/connections" element={<Connections />} />
+                <Route path="/chat/:targetUserId" element={<Chat />} />
+                
                 <Route path="/requests" element={<Requests />} />
                 <Route path="/Upgrade" element={<Upgrade />} />
 
