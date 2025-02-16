@@ -1,56 +1,56 @@
-import React ,{useEffect}from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { useSelector ,useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import axios from 'axios';
 import { addUser } from '../features/userSlice';
-import { NavbarItem } from '@nextui-org/react';
 import { BASE_URL } from "../constants";
 
 const Body = () => {
-  const user= useSelector((store) => store.user);
-  
+  const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation(); // Get the current location (route)
+  
+  // Add a loading state to manage the fetching process
+  const [loading, setLoading] = useState(true);
+
   const fetchUser = async () => {
     try {
-      
-        const res = await axios.get(`${BASE_URL}/profile`, { withCredentials: true });
-        // console.log(res);
-        dispatch(addUser(res?.data?.data)); // Save user data to store
-      
+      const res = await axios.get(`${BASE_URL}/profile`, { withCredentials: true });
+      dispatch(addUser(res?.data?.data)); // Save user data to store
     } catch (error) {
-      // if (error.response && error.response.status === 401) {
-      //   navigate(`${BASE_URL}/login`); // Redirect if 401 error (unauthorized)
-      // }
       console.log(error);
+    } finally {
+      // Only update the loading state when on the root route ('/')
+      if (location.pathname === '/') {
+        setLoading(false);
+      }
     }
   };
-  
+
   useEffect(() => {
-    
-    if(user){
-      navigate('/feed')
-    }
-    // if(!user){
-    //   navigate('/login')
-    // }
-          
     fetchUser();
-  }, []); // Run effect when userData changes
+  }, [dispatch, location.pathname]);
+
+  useEffect(() => {
+    if (!loading) { // Only navigate once loading is finished
+      if (user) {
+        // navigate('/feed');
+      } else {
+        navigate('/login');
+      }
+    }
+  }, [user, navigate, loading]);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-black">
       {/* Navbar at the top */}
-      
       <Navbar />
-
-    {/* {user && (
-      <Feed/>
-    )} */}
+      
+      {/* Main content */}
       <div className="flex-grow flex items-center justify-center">
         <Outlet />
       </div>

@@ -77,29 +77,29 @@ const Navbar = () => {
                   {/* <h2>DevTinder</h2> */}
                 </div>
               </div>
-              <div>
+              <div className="">
                 {isOpen && (
                   <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-400 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="bg-white  menu menu-sm dropdown-content border-2 border-gray-500 bg-base-400 rounded-box z-[1] my-4 w-52 p-2 shadow-lg"
               >
-                <li>
+                <li className="hover:bg-gray-300 rounded-lg">
                   <Link className="justify-between" to={"/profile"}>
                     Profile
                   </Link>
                 </li>
-                <li>
+                <li  className="hover:bg-gray-300 rounded-lg">
                   <Link to={"/connections"}>Connections</Link>
                 </li>
-                <li>
+                <li className="hover:bg-gray-300 rounded-lg">
                   <Link to={"/requests"}>Requests</Link>
                 </li>
-                <li>
+                {/* <li className="hover:bg-gray-300 rounded-lg">
                   <Link className="justify-between" to={"/upgrade"}>
                     Upgrade
                   </Link>
-                </li>
-                <li>
+                </li> */}
+                <li className="hover:bg-gray-300 rounded-lg">
                   <button onClick={logout}>Logout</button>
                 </li>
               </ul>
