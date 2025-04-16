@@ -15,11 +15,11 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    console.log(BASE_URL)
 
     const handleSubmit = async (e) => {
         // e.preventDefault();
         // setErrorMessage(''); // Reset error message before submission
-        console.log(BASE_URL)
         if (!email || !password) {
             setErrorMessage('Both email and password are required.');
             return;
