@@ -8,6 +8,7 @@ import { Card } from './ui/card';
 // import { BASE_URL } from "../constants";
 import { toast } from "sonner";
 import { Label } from './ui/label';
+import { BASE_URL } from '@/constants';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     // console.log("this is base " , BASE_URL)/
-    const BASE_URL = 'https://devtinderbackend-6jr7.onrender.com';
+    // const BASE_URL = 'https://devtinderbackend-6jr7.onrender.com';
     console.log("this is base " , BASE_URL)
     const handleSubmit = async (e) => {
         // e.preventDefault();
