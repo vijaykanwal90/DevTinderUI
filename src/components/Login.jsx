@@ -36,7 +36,7 @@ const Login = () => {
                     },
                 }
             );
-
+            console.log('Login response:', res.data);
             toast.success('Logged in successfully');
 
             // Dispatch user data to Redux store
