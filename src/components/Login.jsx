@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Form, Input, Button } from "@nextui-org/react";
 import { useNavigate, Link } from 'react-router-dom';
@@ -61,7 +61,9 @@ const Login = () => {
             }
         }
     };
-
+useEffect(()=>{
+    console.log("Login page mounted")
+})
     return (
         <Card className="w-full max-w-md flex flex-col gap-6 bg-white p-6 border-4 shadow-lg rounded-lg">
             <h2 className="bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent">
