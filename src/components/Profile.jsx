@@ -26,7 +26,7 @@ const Profile = () => {
   const user = useSelector((state) => state.user)
   const location = user?.location;
   const addressParts = location.split(',').map(part => part.trim());
-
+  console.log(" on profile base url is ", BASE_URL)
   // Assign the first and second parts to respective variables
   const firstAddress = addressParts[0];
   const secondAddress = addressParts[1] ? addressParts[1] : ''; // "Maharashtra" (or empty string if there's no second part)

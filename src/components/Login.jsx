@@ -44,7 +44,7 @@ const res = await axios.post(
 
             // Dispatch user data to Redux store
             dispatch(addUser(res?.data?.data));
-
+            console.log('User data dispatched:', res?.data?.data);
             // Redirect on successful login
             if (res.status === 200) {
                 navigate('/feed');
