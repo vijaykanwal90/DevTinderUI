@@ -15,7 +15,7 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    console.log(BASE_URL)
+    console.log("this is base " , BASE_URL)
 
     const handleSubmit = async (e) => {
         // e.preventDefault();
