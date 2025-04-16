@@ -30,7 +30,7 @@ const Login = () => {
         try {  
             console.log('Login request:', { email, password });
 const res = await axios.post(
-    `${BASE_URL}/api/login`,  // Using dynamic value here
+    `${BASE_URL}/login`,  // Using dynamic value here
     { email, password },
     {
         withCredentials: true,
