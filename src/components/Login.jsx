@@ -17,8 +17,8 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrorMessage(''); // Reset error message before submission
+        // e.preventDefault();
+        // setErrorMessage(''); // Reset error message before submission
 
         if (!email || !password) {
             setErrorMessage('Both email and password are required.');
