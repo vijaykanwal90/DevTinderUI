@@ -5,7 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../features/userSlice';
 import { Card } from './ui/card';
-import { BASE_URL } from "../constants";
+// import { BASE_URL } from "../constants";
 import { toast } from "sonner";
 import { Label } from './ui/label';
 
@@ -15,7 +15,7 @@ const Login = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    console.log("this is base " , BASE_URL)
+    // console.log("this is base " , BASE_URL)/
     const BASE_URL = 'https://devtinderbackend-6jr7.onrender.com';
     const handleSubmit = async (e) => {
         // e.preventDefault();
