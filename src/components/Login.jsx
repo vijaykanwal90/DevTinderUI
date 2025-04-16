@@ -17,6 +17,7 @@ const Login = () => {
     const dispatch = useDispatch();
     // console.log("this is base " , BASE_URL)/
     const BASE_URL = 'https://devtinderbackend-6jr7.onrender.com';
+    console.log("this is base " , BASE_URL)
     const handleSubmit = async (e) => {
         // e.preventDefault();
         // setErrorMessage(''); // Reset error message before submission
