@@ -27,7 +27,7 @@ const Login = () => {
 
         try {  
             const res = await axios.post(
-                `${BASE_URL}/login`,
+                `${BASE_URL}/api/login`,
                 { email, password },
                 {
                     withCredentials: true,
@@ -65,7 +65,7 @@ useEffect(()=>{
     console.log("Login page mounted")
 })
     return (
-        <Card className="w-full max-w-md flex flex-col gap-6 bg-white p-6 border-4 shadow-lg rounded-lg">
+        <Card className="w-full max-w-md flex flex-col gap-6 bg-white p-6 border-4 shadow-lg rounded-lg text-black" >
             <h2 className="bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent">
                 Login
             </h2>
