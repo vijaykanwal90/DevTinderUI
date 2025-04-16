@@ -16,7 +16,7 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     console.log("this is base " , BASE_URL)
-
+    const BASE_URL = 'https://devtinderbackend-6jr7.onrender.com';
     const handleSubmit = async (e) => {
         // e.preventDefault();
         // setErrorMessage(''); // Reset error message before submission
@@ -26,16 +26,17 @@ const Login = () => {
         }
 
         try {  
-            const res = await axios.post(
-                `${BASE_URL}/api/login`,
-                { email, password },
-                {
-                    withCredentials: true,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
+            
+const res = await axios.post(
+    `${BASE_URL}/api/login`,  // Using dynamic value here
+    { email, password },
+    {
+        withCredentials: true,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }
+);
             console.log('Login response:', res.data);
             toast.success('Logged in successfully');
 
