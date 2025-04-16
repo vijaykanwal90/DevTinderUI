@@ -19,7 +19,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         // e.preventDefault();
         // setErrorMessage(''); // Reset error message before submission
-
+        console.log(BASE_URL)
         if (!email || !password) {
             setErrorMessage('Both email and password are required.');
             return;
