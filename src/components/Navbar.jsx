@@ -30,6 +30,7 @@ const Navbar = () => {
       );
       // setIsLoggedIn(false);
       dispatch(removeUser());
+      localStorage.removeItem("authToken");
 
       navigate("/login");
     } catch (error) {
