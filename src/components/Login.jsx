@@ -31,16 +31,20 @@ const Login = () => {
             console.log('Login request:', { email, password });
 const res = await axios.post(
     `${BASE_URL}/login`,  // Using dynamic value here
-    { email, password },
-    {
-        withCredentials: true,
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-    }
+    { email, password }
+    // {
+    //     withCredentials: true,
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         Authorization: `Bearer ${localStorage.getItem('token')}`,
+    //     },
+    // }
 );
+        const {token, data} = res.data;
+        localStorage.setItem('token', token);
             console.log('Login response:', res.data);
+            console.log(data)
+            console.log("token is " + token)
             toast.success('Logged in successfully');
 
             // Dispatch user data to Redux store
