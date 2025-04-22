@@ -37,7 +37,7 @@ const Signup = () => {
       //   },
       //   // { withCredentials: true }
       // );
-      const res = await axios.post('http://localhost:3000/api/signup',{
+      const res = await axios.post('http://localhost:3000/api/auth/signup',{
         firstName,
         lastName,
         email,

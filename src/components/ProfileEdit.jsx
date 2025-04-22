@@ -88,7 +88,7 @@ const ProfileEdit = ({ isOpen, setIsOpen }) => {
     try {
       console.log("location is",location)
       const res = await axios.patch(
-        `${BASE_URL}/profile/edit`,
+        `${BASE_URL}/dashboard/profile/edit`,
         { firstName, lastName, age, photoUrl, gender, about,location },
         { withCredentials: true }
       );
