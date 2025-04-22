@@ -32,7 +32,7 @@ const Body = () => {
   };
 
   useEffect(() => {
-    fetchUser();
+    // fetchUser();
   }, [dispatch, location.pathname]);
 
   useEffect(() => {

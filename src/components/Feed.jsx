@@ -16,7 +16,7 @@ const Feed = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/feed`, { withCredentials: true });
+      const res = await axios.get(`${BASE_URL}/user/feed`, { withCredentials: true });
       dispatch(addFeed(res?.data?.data));
     } catch (error) {
       console.log('Error fetching feed data: ' + error.message);
@@ -27,7 +27,7 @@ const Feed = () => {
     setStatus(newStatus);
     try {
       await axios.post(
-        `${BASE_URL}/sendConnectionRequest/${newStatus}/${toUser}`,
+        `${BASE_URL}/request/sendConnectionRequest/${newStatus}/${toUser}`,
         {},
         { withCredentials: true }
       );

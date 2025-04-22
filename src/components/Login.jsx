@@ -9,18 +9,21 @@ import { Card } from './ui/card';
 import { toast } from "sonner";
 import { Label } from './ui/label';
 import { BASE_URL } from '@/constants';
-
+import { FaRegEyeSlash } from 'react-icons/fa';
+import { IoEyeOutline } from 'react-icons/io5';
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('obama1234@gmail.com');
+    const [password, setPassword] = useState('Obama@123');
     const [errorMessage, setErrorMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    
     // console.log("this is base " , BASE_URL)/
     // const BASE_URL = 'https://devtinderbackend-6jr7.onrender.com';
-    console.log("this is base " , BASE_URL)
+    // console.log("this is base " , BASE_URL)
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         // setErrorMessage(''); // Reset error message before submission
         if (!email || !password) {
             setErrorMessage('Both email and password are required.');
@@ -29,19 +32,17 @@ const Login = () => {
 
         try {  
             console.log('Login request:', { email, password });
-const res = await axios.post(
-    `${BASE_URL}/login`,  // Using dynamic value here
-    { email, password }
-    // {
-    //     withCredentials: true,
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         Authorization: `Bearer ${localStorage.getItem('token')}`,
-    //     },
-    // }
-);
+            const res = await axios.post(`${BASE_URL}/auth/login`, { email, password }, {
+                // withCredentials: true,
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+              
+console.log(res)
+
         const {token, data} = res.data;
-        localStorage.setItem('token', token);
+            localStorage.setItem('token', token);
             console.log('Login response:', res.data);
             console.log(data)
             console.log("token is " + token)
@@ -69,9 +70,7 @@ const res = await axios.post(
             }
         }
     };
-useEffect(()=>{
-    console.log("Login page mounted")
-})
+
     return (
         <Card className="w-full max-w-md flex flex-col gap-6 bg-white p-6 border-4 shadow-lg rounded-lg text-black" >
             <h2 className="bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent">
@@ -95,17 +94,35 @@ useEffect(()=>{
             <Label className="text-black" htmlFor="password">
                 Password
             </Label>
+            <div className='flex'>
             <Input
                 required
                 errorMessage="Please enter a valid password"
                 labelPlacement="outside"
                 placeholder="Enter your password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 className="text-black"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
-            />
 
+            />
+            
+            <span onClick={()=>{
+                setShowPassword(!showPassword)
+            }} className='mt-2'>
+                {showPassword ? (
+                <FaRegEyeSlash />
+                ):(
+                    <IoEyeOutline />
+                )}
+                
+                </span>
+
+                
+                
+
+            </div>
+           
             {errorMessage && (
                 <p className="text-red-500 text-center">{errorMessage}</p>
             )}

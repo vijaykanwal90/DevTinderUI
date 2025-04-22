@@ -11,11 +11,11 @@ import { BASE_URL } from "../constants";
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("barack");
+  const [lastName, setLastName] = useState("obama");
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("obama123@gmail.com");
+  const [password, setPassword] = useState("Obama@123");
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,16 +26,28 @@ const Signup = () => {
       password,
     });
     try {
-      const res = await axios.post(
-        `${BASE_URL}/signup`,
-        {
-          firstName,
-          lastName,
-          email,
-          password,
-        },
-        { withCredentials: true }
-      );
+      console.log("at sign up", BASE_URL)
+      // const res = await axios.post(
+      //   `${BASE_URL}/signup`,
+      //   {
+      //     firstName,
+      //     lastName,
+      //     email,
+      //     password,
+      //   },
+      //   // { withCredentials: true }
+      // );
+      const res = await axios.post('http://localhost:3000/api/signup',{
+        firstName,
+        lastName,
+        email,
+        password
+      },{
+        withCredentials:true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
       console.log(res.status);
       if (res.status === 201) {
 
