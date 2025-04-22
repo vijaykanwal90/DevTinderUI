@@ -18,7 +18,9 @@ const Signup = () => {
   const [password, setPassword] = useState("Obama@123");
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e?.preventDefault) {
+      e.preventDefault();
+    }
     console.log({
       firstName,
       lastName,
@@ -37,7 +39,7 @@ const Signup = () => {
       //   },
       //   // { withCredentials: true }
       // );
-      const res = await axios.post('http://localhost:3000/api/auth/signup',{
+      const res = await axios.post(`${BASE_URL}/api/auth/signup`,{
         firstName,
         lastName,
         email,

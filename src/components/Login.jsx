@@ -23,7 +23,9 @@ const Login = () => {
     // const BASE_URL = 'https://devtinderbackend-6jr7.onrender.com';
     // console.log("this is base " , BASE_URL)
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        if (e?.preventDefault) {
+            e.preventDefault();
+          }
         // setErrorMessage(''); // Reset error message before submission
         if (!email || !password) {
             setErrorMessage('Both email and password are required.');
