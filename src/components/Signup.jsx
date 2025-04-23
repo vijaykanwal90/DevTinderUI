@@ -39,7 +39,7 @@ const Signup = () => {
       //   },
       //   // { withCredentials: true }
       // );
-      const res = await axios.post(`${BASE_URL}/api/auth/signup`,{
+      const res = await axios.post(`${BASE_URL}/auth/signup`,{
         firstName,
         lastName,
         email,
