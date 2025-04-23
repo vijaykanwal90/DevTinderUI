@@ -74,7 +74,8 @@ const Profile = () => {
   <div className="container mx-auto max-w-7xl">
     <div className="w-full lg:w-8/12 grid gap-6 md:grid-cols-[350px_1fr]">
       
-      {/* Profile Card */}
+      {/* 
+       Card */}
       <Card className="h-fit shadow-lg rounded-2xl border border-gray-200">
         <CardHeader className="relative pb-0">
           <div className="absolute right-4 top-4 flex gap-2">

@@ -19,7 +19,7 @@ const Body = () => {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/profile`, { withCredentials: true });
+      const res = await axios.get(`${BASE_URL}/dashboard/profile`, { withCredentials: true });
       dispatch(addUser(res?.data?.data)); // Save user data to store
     } catch (error) {
       console.log(error);
@@ -36,13 +36,14 @@ const Body = () => {
   }, [dispatch, location.pathname]);
 
   useEffect(() => {
-    if (!loading) { // Only navigate once loading is finished
+    console.log()
+    // Only navigate once loading is finished
       if (user) {
         // navigate('/feed');
       } else {
         navigate('/login');
       }
-    }
+    
   }, [user, navigate, loading]);
 
   return (
