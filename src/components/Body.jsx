@@ -39,7 +39,7 @@ const Body = () => {
     console.log()
     // Only navigate once loading is finished
       if (user) {
-        // navigate('/feed');
+        navigate('/feed');
       } else {
         navigate('/login');
       }
