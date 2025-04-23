@@ -12,8 +12,8 @@ import { BASE_URL } from '@/constants';
 import { FaRegEyeSlash } from 'react-icons/fa';
 import { IoEyeOutline } from 'react-icons/io5';
 const Login = () => {
-    const [email, setEmail] = useState('obama1234@gmail.com');
-    const [password, setPassword] = useState('Obama@123');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();

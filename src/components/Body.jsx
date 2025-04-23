@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { addUser } from '../features/userSlice';
 import { BASE_URL } from "../constants";
@@ -12,45 +11,39 @@ const Body = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation(); // Get the current location (route)
-  
-  // Add a loading state to manage the fetching process
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
 
   const fetchUser = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/dashboard/profile`, { withCredentials: true });
-      dispatch(addUser(res?.data?.data)); // Save user data to store
+      dispatch(addUser(res?.data?.data));
     } catch (error) {
       console.log(error);
     } finally {
-      // Only update the loading state when on the root route ('/')
-      if (location.pathname === '/') {
-        setLoading(false);
-      }
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    // fetchUser();
-  }, [dispatch, location.pathname]);
+    fetchUser();
+  }, []);
 
   useEffect(() => {
-    console.log()
-    // Only navigate once loading is finished
-      if (user) {
+    if (!loading) {
+      if (user && location.pathname === '/') {
         navigate('/feed');
-      } else {
+      } else if (!user && location.pathname !== '/login') {
         navigate('/login');
       }
-    
-  }, [user, navigate, loading]);
+    }
+  }, [user, loading, navigate, location.pathname]);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-black">
       {/* Navbar at the top */}
       <Navbar />
-      
+
       {/* Main content */}
       <div className="flex-grow flex items-center justify-center">
         <Outlet />
