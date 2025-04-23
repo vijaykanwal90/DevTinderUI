@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import Upgrade from "./components/Upgrade";
 import Chat from "./components/Chat"; 
 import { NextUIProvider } from "@nextui-org/react";
+
 function App() {
   return (
     <>
@@ -18,18 +19,20 @@ function App() {
         <NextUIProvider>
           <BrowserRouter>
             <Routes>
+              {/* Define the layout route for the Body component */}
               <Route path="/" element={<Body />}>
+                {/* These are the inner routes that will be rendered inside the Body */}
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
                 <Route path="/connections" element={<Connections />} />
-                <Route path="/chat/:targetUserId" element={<Chat />} />
-                
                 <Route path="/requests" element={<Requests />} />
-                <Route path="/Upgrade" element={<Upgrade />} />
-
                 <Route path="/feed" element={<Feed />} />
               </Route>
+              
+              {/* Other routes without the Body component */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/upgrade" element={<Upgrade />} />
+              <Route path="/chat/:targetUserId" element={<Chat />} />
             </Routes>
           </BrowserRouter>
         </NextUIProvider>
