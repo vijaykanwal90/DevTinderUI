@@ -8,14 +8,19 @@ import { Label } from "./ui/label";
 import { useDispatch } from "react-redux";
 import { addUser } from "../features/userSlice";
 import { BASE_URL } from "../constants";
-
+import { FaRegEyeSlash } from 'react-icons/fa';
+import { IoEyeOutline } from 'react-icons/io5';
+import { Toaster,toast } from "sonner";
+import { Toast } from "@radix-ui/react-toast";
 const Signup = () => {
   const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState("barack");
-  const [lastName, setLastName] = useState("obama");
+  const [firstName, setFirstName] = useState("one");
+  const [lastName, setLastName] = useState("level");
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("onelevel123@gmail.com");
+  const [password, setPassword] = useState("Onelevel@123");
+  const [showPassword, setShowPassword] = useState(false);
+  // const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     if (e?.preventDefault) {
@@ -55,9 +60,12 @@ const Signup = () => {
         console.log("User added successfully");
         // dispatch(addUser(res?.data?.data));
         // navigate("/feed");
+        toast.success("User registered successfully");
         navigate("/login");
       }
     } catch (error) {
+      
+      toast.error("User already exists");
       console.log(error);
     }
   };
@@ -114,16 +122,27 @@ const Signup = () => {
         <Label className="text-black" htmlFor="password">
           Password
         </Label>
+        <div className="flex">
         <Input
           required
           name="password"
           placeholder="Enter your password"
-          type="password" // Set to password type
-          className="text-black"
+          type={showPassword ? "text" : "password"}// Set to password type
+          className="text-black border-2 border-gray-300 rounded-lg"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
-        />
 
+        />
+         <span
+                                 onClick={() => {
+                                     setShowPassword(!showPassword);
+                                 }}
+                                 className="mt-2 cursor-pointer right-6 relative"
+                             >
+                                 {showPassword ? <FaRegEyeSlash /> : <IoEyeOutline />}
+                             </span>
+            
+                             </div>
         <div className="flex justify-center">
           <Button
             color="primary"
@@ -132,6 +151,7 @@ const Signup = () => {
           >
             Submit
           </Button>
+          <Toaster richColors />
         </div>
         <p className="text-center text-sm text-gray-600">
           Don't have an account?{" "}

@@ -29,10 +29,11 @@ const Requests = () => {
 
     
   }
-  const handleClick = (status,userId)=> async()=>{
+  const handleClick = (status,requestId)=> async()=>{
     
-    
-    const res = await axios.post(`${BASE_URL}/reviewConnectionRequest/`+ status + "/" + userId,{}, {withCredentials:true})
+    console.log(BASE_URL)
+    // console.log(_id)
+    const res = await axios.post(`${BASE_URL}/request/reviewConnectionRequest/`+ status + "/" + requestId,{}, {withCredentials:true})
     
     dispatch(removeRequest(res.userId))
   }
@@ -40,7 +41,7 @@ const Requests = () => {
     fetchRequests()
   },[])
 
- 
+ console.log(request)
  if(!request){
     return <h1>Loading...</h1>
  }
@@ -55,7 +56,8 @@ const Requests = () => {
   <div className='w-full max-w-md mx-auto'>
     <h1 className='font-bold text-3xl text-center mb-6 text-gray-800'>Requests</h1>
     {requests.map((request) => {
-      const { firstName, lastName, photoUrl, about } = request.fromUserId;
+      const { firstName, lastName, photoUrl, about  } = request.fromUserId;
+      const requestId = request._id;
       return (
         <div key={request._id} className="flex items-center my-5 bg-gray-200 p-4 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-gray-300">
           <div className="mr-4 flex-shrink-0">
@@ -73,7 +75,7 @@ const Requests = () => {
           </div>
           <div className='flex flex-col gap-2 mx-auto'>
             <Button className="bg-red-500" onClick = {handleClick("rejected",request._id)}>Reject</Button>
-            <Button className="bg-green-500"onClick = {handleClick("accepted",request._id)}>Accept</Button>
+            <Button className="bg-green-500"onClick = {handleClick("accepted", requestId)}>Accept</Button>
 
             
           </div>
