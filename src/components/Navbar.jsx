@@ -19,7 +19,7 @@ const Navbar = () => {
     try {
       await axios.post(`${BASE_URL}/auth/logout`, {}, { withCredentials: true });
       dispatch(removeUser());
-      localStorage.removeItem("authToken");
+      localStorage.removeItem("token");
       navigate("/login");
     } catch (error) {
       console.log(error);
@@ -37,13 +37,7 @@ const Navbar = () => {
 
       {user && (
         <div className="flex-none gap-2">
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered w-24 md:w-auto text-black bg-gray-300 h-10"
-            />
-          </div>
+          
 
           <p className="hidden sm:inline bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent">
             Hello {user?.firstName}

@@ -6,13 +6,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import UserCard from './UserCard';
 import { BASE_URL } from "../constants";
 
-
 const Feed = () => {
   const dispatch = useDispatch();
   const feed = useSelector((state) => state.feed);
   const [status, setStatus] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0); // Track the current feed item index
-  const [animationStage, setAnimationStage] = useState(0); // 0: initial, 1: moved, 2: returning
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [animationStage, setAnimationStage] = useState(0);
 
   const fetchData = async () => {
     try {
@@ -32,14 +31,19 @@ const Feed = () => {
         { withCredentials: true }
       );
       dispatch(removeFeed(toUser));
-      setAnimationStage(1); // Move to the 'moved' stage
+      setAnimationStage(1);
       setTimeout(() => {
-        setAnimationStage(2); // After the first animation, move to the 'returning' stage
+        setAnimationStage(2);
         setTimeout(() => {
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % feed.length);
-          setAnimationStage(0); // Reset to initial stage
-        }, 500); // Match this duration with your 'returning' animation duration
-      }, 500); // Match this duration with your 'moved' animation duration
+          setCurrentIndex((prevIndex) => {
+            if (prevIndex + 1 >= feed.length - 1) {
+              return 0;
+            }
+            return prevIndex + 1;
+          });
+          setAnimationStage(0);
+        }, 500);
+      }, 500);
     } catch (error) {
       console.log('Error sending request: ' + error.message);
     }
@@ -49,18 +53,20 @@ const Feed = () => {
     fetchData();
   }, []);
 
-  if (!feed || feed.length === 0) {
-    return <div className='min-h-[70vh] flex items-center justify-center bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent '>
-      No users to show!
-
-    </div>;
+  // 🛠️ ADDITIONAL CHECK: if feed is empty or no more users left
+  if (!feed || feed.length === 0 || currentIndex >= feed.length) {
+    return (
+      <div className='min-h-[70vh] flex items-center justify-center bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent'>
+        No users to show!
+      </div>
+    );
   }
 
   return (
     <AnimatePresence>
       <motion.div
-        key={feed[currentIndex].id} // Use a unique key for each feed item
-        initial={{ opacity: 0, x: 0, y: 0 }} // Reset position on entry
+        key={feed[currentIndex]?.id}
+        initial={{ opacity: 0, x: 0, y: 0 }}
         animate={{
           opacity: 1,
           x: animationStage === 1 ? (status === 'ignored' ? -500 : 500) : 0,
@@ -68,7 +74,7 @@ const Feed = () => {
         }}
         exit={{
           opacity: 0,
-          transition: { duration: 0.5 }, // Ensure the card has time to exit
+          transition: { duration: 0.5 },
         }}
         transition={{ duration: 0.5 }}
       >
