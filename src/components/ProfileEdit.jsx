@@ -29,8 +29,8 @@ const ProfileEdit = ({ isOpen, setIsOpen }) => {
   const [location, setLocation] = useState(user?.location || ' ');
   const [locationSuggestion, setLocationSuggestion] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState('');
-  const key = process.env.REACT_APP_LOCATIONIQ_KEY;
-  console.log(key)
+  // const key = process.env.REACT_APP_LOCATIONIQ_KEY;
+  // console.log(key)
   const dispatch = useDispatch();
 
   const getCurrentLocation = async () => {
