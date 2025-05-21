@@ -31,6 +31,7 @@ const Body = () => {
 
   useEffect(() => {
     if (!loading) {
+      console.log(location.pathname);
       if (user && location.pathname === '/') {
         navigate('/feed');
       } else if (!user && location.pathname !== '/login') {
