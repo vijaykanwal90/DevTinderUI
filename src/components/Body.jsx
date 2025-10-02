@@ -16,7 +16,9 @@ const Body = () => {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/dashboard/profile`, { withCredentials: true });
+      console.log("on body...")
+      const res = await axios.get(`${BASE_URL}/dashboard/profile`);
+      console.log(res)
       dispatch(addUser(res?.data?.data));
     } catch (error) {
       console.log(error);
@@ -31,7 +33,7 @@ const Body = () => {
 
   useEffect(() => {
     if (!loading) {
-      console.log(location.pathname);
+      // console.log(location.pathname);
       if (user && location.pathname === '/') {
         navigate('/feed');
       } else if (!user && location.pathname !== '/login') {

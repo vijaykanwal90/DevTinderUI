@@ -3,9 +3,9 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { addFeed, removeFeed } from '../features/feedSlice';
 import { motion, AnimatePresence } from 'framer-motion';
-import UserCard from './UserCard';
+// import UserCard from './UserCard';
 import { BASE_URL } from "../constants";
-
+import Posts from './Posts';
 const Feed = () => {
   const dispatch = useDispatch();
   const feed = useSelector((state) => state.feed);
@@ -15,6 +15,7 @@ const Feed = () => {
 
   const fetchData = async () => {
     try {
+      console.log("getting feed")
       const res = await axios.get(`${BASE_URL}/user/feed`, { withCredentials: true });
       dispatch(addFeed(res?.data?.data));
     } catch (error) {
@@ -25,6 +26,7 @@ const Feed = () => {
   const requestSent = (newStatus, toUser) => async () => {
     setStatus(newStatus);
     try {
+      console.log("request sent")
       await axios.post(
         `${BASE_URL}/request/sendConnectionRequest/${newStatus}/${toUser}`,
         {},
@@ -53,36 +55,14 @@ const Feed = () => {
     fetchData();
   }, []);
 
-  // 🛠️ ADDITIONAL CHECK: if feed is empty or no more users left
-  if (!feed || feed.length === 0 || currentIndex >= feed.length) {
-    return (
-      <div className='min-h-[70vh] flex items-center justify-center bg-gradient-to-r from-orange-400 to-red-500 text-2xl font-bold text-center bg-clip-text text-transparent'>
-        No users to show!
-      </div>
-    );
-  }
+
+ 
 
   return (
     <AnimatePresence>
-      <motion.div
-        key={feed[currentIndex]?.id}
-        initial={{ opacity: 0, x: 0, y: 0 }}
-        animate={{
-          opacity: 1,
-          x: animationStage === 1 ? (status === 'ignored' ? -500 : 500) : 0,
-          y: animationStage === 1 ? (status === 'ignored' || status === 'interested' ? -500 : 0) : 0,
-        }}
-        exit={{
-          opacity: 0,
-          transition: { duration: 0.5 },
-        }}
-        transition={{ duration: 0.5 }}
-      >
-        <UserCard
-          user={feed[currentIndex]}
-          status={status}
-          requestSent={requestSent}
-        />
+      <motion.div >
+      <Posts/>
+
       </motion.div>
     </AnimatePresence>
   );
